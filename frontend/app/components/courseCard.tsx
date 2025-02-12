@@ -1,6 +1,11 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+type navList = {
+    CourseDetail : undefined;
+};
+type NavigationProp =  StackNavigationProp<navList>;
 
 interface Course {
     id: number;
@@ -14,9 +19,11 @@ interface CourseCardProps {
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({ item }) => {
+    const navigation = useNavigation<NavigationProp>();
     return (
 
-        <TouchableOpacity className='bg-white rounded-3xl shadow-lg w-full p-2'>
+        <TouchableOpacity onPress={()=> navigation.navigate("CourseDetail")}
+        className='bg-white rounded-3xl shadow-lg w-full p-2'>
             <Image className="h-36 w-full bg-purple-500 rounded-t-3xl" />
             <View className="px-3 pb-4 space-y-2">
                 <Text className='text-lg font-bold pt-2'>{item.name}</Text>

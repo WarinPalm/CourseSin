@@ -5,14 +5,16 @@ import * as Icon from 'react-native-feather';
 import Category from '../components/category';
 import FeatureRow from '../components/featuredRow';
 import CourseCard from '../components/courseCard';
+import Navbar from '../components/navbar';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type navList ={
+type navList = {
   Profile: undefined;
+  ViewAll : undefined;
 };
 
-type NavigationProp =  StackNavigationProp<navList>;
+type NavigationProp = StackNavigationProp<navList>;
 
 const Home = () => {
   const navigation = useNavigation<NavigationProp>();
@@ -29,58 +31,41 @@ const Home = () => {
     { id: 9, name: 'CourseName9', description: 'Advanced JavaScript techniques.', category: 'Programming' }
   ];
 
+
   return (
     <SafeAreaView className='bg-white flex-1'>
-      {/* header */}
-      <View>
-        <View className='flex-row justify-between items-center px-4 pt-4'>
-          <Text className='text-2xl font-bold'>CourseSin</Text>
-          <TouchableOpacity onPress={()=> navigation.navigate('Profile')}
-           className='p-3 bg-purple-500 rounded-2xl w-12 h-12 items-center justify-center'>
-            
-            <Icon.Heart height="25" width="25" strokeWidth={2.5} stroke="white" />
-          </TouchableOpacity>
-        </View>
-      </View>
-      {/* search bar */}
-      <View className='flex-row items-center space-x-2 px-4 pb-2'>
-        <View className='bg-white flex-row flex-1 items-center p-3 m-3 rounded-2xl border border-purple-900'>
-          <Icon.Search height="25" width="25" stroke="gray" />
-          <TextInput placeholder="Search for Course" className='ml-2 flex-1' />
-        </View>
-
-      </View>
+      <Navbar/>
       {/* main */}
       <View className='flex-1'>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
-        <Category />
-        {/* suggestion */}
-        <FeatureRow />
+        <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+          <Category />
+          {/* suggestion */}
+          <FeatureRow />
 
-        {/* all course */}
-        <View className='mt-3'>
-          <View className='flex-row items-center justify-between px-4'>
-            <View>
-              <Text className='font-bold text-lg'>Courses</Text>
-              <Text className="text-black text-xs">all Course</Text>
-            </View>
-            <TouchableOpacity>
-              <Text className='font-semibold text-black'>View All</Text>
-            </TouchableOpacity>
-          </View>
-          <View className='mt-5 px-4 flex-row flex-wrap'>
-            {courses.map((course, index) => (
-              <View key={index} className='w-1/2  p-2'>
-                <CourseCard item={course} />
+          {/* all course */}
+          <View className='mt-3'>
+            <View className='flex-row items-center justify-between px-4'>
+              <View>
+                <Text className='font-bold text-lg'>Courses</Text>
+                <Text className="text-black text-xs">all Course</Text>
               </View>
-            ))}
+              <TouchableOpacity onPress={()=> navigation.navigate("ViewAll")}>
+                <Text className='font-semibold text-black'>View All</Text>
+              </TouchableOpacity>
+            </View>
+            <View className='mt-2 px-4 flex-row flex-wrap'>
+              {courses.slice(0, 4).map((course, index) => (
+                <View key={index} className='w-1/2 p-2'>
+                  <CourseCard item={course} />
+                </View>
+              ))}
 
-              
+
+            </View>
           </View>
-        </View>
 
-      </ScrollView>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

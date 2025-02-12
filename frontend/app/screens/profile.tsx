@@ -14,8 +14,8 @@ type NavigationProp = StackNavigationProp<navList>;
 const Profile = () => {
     const navigation = useNavigation<NavigationProp>();
   return (
-    <View>
-        <ScrollView>
+    <View className='flex-1'>
+        <ScrollView contentContainerStyle={{flexGrow:1}}>
             <View className='relative'>
                 <Image className='w-full h-40 bg-purple-500'/>
                 <TouchableOpacity onPress={()=> navigation.navigate("Home")}
@@ -31,7 +31,7 @@ const Profile = () => {
                     <Text className='text-sm'>category</Text>
                 </View>
             </View>
-            <View className='bg-white pb-36'>
+            <View className='bg-white pb-36 flex-1'>
                 <Text className='px-4 py-4 text-2xl font-bold'>Video</Text>
                 <View className='bg-purple-300 p-3 rounded-3xl shadow-2xl mb-3 mx-2'>
                     <Image className='w-25 h-36'/>

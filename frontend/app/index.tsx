@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/home';
 import CourseDetail from './screens/courseDetail';
 import Profile from './screens/profile';
+import ViewAll from './screens/viewAll';
 const Stack = createNativeStackNavigator();
 
 const Index = () => {
@@ -12,6 +13,7 @@ const Index = () => {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="CourseDetail" component={CourseDetail} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="ViewAll" component={ViewAll} />
     </Stack.Navigator>
    
   );
