@@ -9,7 +9,7 @@ import Animated,{ useSharedValue, useAnimatedStyle, withSpring} from 'react-nati
 export default function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 
     return (
-        <View  className='absolute bg-purple-300 mx-10 p-5 flex-row bottom-0 justify-between items-center rounded-3xl'>
+        <View  className='bg-white p-3 flex-row bottom-0 justify-between items-center border-t-2 border-purple-800 '>
            
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];

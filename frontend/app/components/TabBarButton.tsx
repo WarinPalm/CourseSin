@@ -38,7 +38,7 @@ const TabBarButton: React.FC<TabBarButtonProps> = ({ onPress, onLongPress, isFoc
     <Pressable
       onPress={onPress}
       onLongPress={onLongPress}
-      className='flex-1 justify-center items-center gap-5'
+      className='flex-1 justify-center items-center gap-2'
     >
       <Animated.View style={animatedIconStyle}>
 

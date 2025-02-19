@@ -4,18 +4,9 @@ import CourseCard from '../components/courseCard'
 import Category from '../components/category'
 import Navbar from '../components/navbar'
 import * as Icon from 'react-native-feather';
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
-
-type navList = {
-    Home : undefined;
-    CourseDetail : undefined;
-}
-type NavigationProp = StackNavigationProp<navList>;
+import { Link } from 'expo-router'
 
 const ViewAll = () => {
-    const navigation = useNavigation<NavigationProp>();
-
     const courses = [
         { id: 1, name: 'CourseName1', description: 'Learn the basics of Python programming.', category: 'Programming' },
         { id: 2, name: 'CourseName2', description: 'Deep dive into React and its ecosystem.', category: 'Web Development' },
@@ -34,9 +25,8 @@ const ViewAll = () => {
                 <Navbar />
                 {/* button back */}
                 <View className='relative'>
-                    <TouchableOpacity onPress={() => navigation.navigate("Home")}
-                        className='absolute bg-white left-4 p-2 rounded-full'>
-                        <Icon.ArrowLeft strokeWidth={3} color={"black"} />
+                    <TouchableOpacity className='absolute bg-white left-4 p-2 rounded-full'>
+                        <Link href="/(tabs)"><Icon.ArrowLeft strokeWidth={3} color={"black"} /></Link>
                     </TouchableOpacity>
                     <Text className='text-center font-bold text-xl'>Category: xxxxx</Text>
                 </View>

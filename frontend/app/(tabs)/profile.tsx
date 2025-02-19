@@ -1,29 +1,18 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import * as Icon from 'react-native-feather';
-import Cart from '../components/cart';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-
-type navList = {
-    Home: undefined;
-}
-
-type NavigationProp = StackNavigationProp<navList>;
+import { Link } from 'expo-router';
 
 const Profile = () => {
-    const navigation = useNavigation<NavigationProp>();
     const [isActive, setIsActive] = useState('About');
-
     return (
         <View className='flex-1'>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 {/* button back */}
                 <View className='relative'>
                     <Image className='w-full h-40 bg-purple-500' />
-                    <TouchableOpacity onPress={() => navigation.navigate("Home")}
-                        className='absolute bg-white top-8 left-4 p-2 rounded-full'>
-                        <Icon.ArrowLeft strokeWidth={3} color={"black"} />
+                    <TouchableOpacity className='absolute bg-white top-8 left-4 p-2 rounded-full'>
+                        <Link href="/(tabs)"><Icon.ArrowLeft strokeWidth={3} color={"black"} /></Link>
                     </TouchableOpacity>
                 </View>
 

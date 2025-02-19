@@ -1,25 +1,18 @@
 import { View, Text, TouchableOpacity, TextInput} from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
 import * as Icon from 'react-native-feather';
-type navList = {
-    Profile : undefined;
-}
-type NavigationProp = StackNavigationProp<navList>
+import { Link } from 'expo-router';
 
 const Navbar = () => {
-    const navigation = useNavigation<NavigationProp>();
   return (
     <View>
     {/* header */}
     <View>
     <View className='flex-row justify-between items-center px-4 pt-4'>
       <Text className='text-2xl font-bold'>CourseSin</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Profile')}
-        className='p-3 bg-purple-500 rounded-2xl w-12 h-12 items-center justify-center'>
+      <TouchableOpacity className='p-3 bg-purple-500 rounded-2xl w-12 h-12 items-center justify-center'>
 
-        <Icon.Heart height="25" width="25" strokeWidth={2.5} stroke="white" />
+        <Link href="/(tabs)/profile"><Icon.Heart height="25" width="25" strokeWidth={2.5} stroke="white" /></Link>
       </TouchableOpacity>
     </View>
   </View>
