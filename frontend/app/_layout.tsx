@@ -1,14 +1,19 @@
 import { Stack } from "expo-router";
 import './global.css';
-import CourseDetail from "./screens/courseDetail";
-import ViewAll from "./screens/viewAll";
-import { createStackNavigator } from "@react-navigation/stack";
+import React,{useState} from "react";
+
 
 export default function RootLayout() {
+  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
+
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(tabs)"/>
-
+      {/* {isLoggedIn ? (
+        <Stack.Screen name="(tabs)"/>
+      ) : (
+        <Stack.Screen name="login"/>
+        )} */}
+        <Stack.Screen name="(tabs)"/>
     </Stack>
   );
 }

@@ -1,12 +1,12 @@
-import { View, Text, ScrollView, Image, TouchableOpacity, SafeAreaView} from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 import * as Icon from 'react-native-feather';
 import Cart from '../components/cart';
-import { Link } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 
 const CourseDetail = () => {
-
     const [isActive, setIsActive] = useState('About');
+    const navigation = useNavigation();
 
     return (
         <SafeAreaView className='flex-1'>
@@ -15,8 +15,11 @@ const CourseDetail = () => {
                 {/* button back */}
                 <View className='relative'>
                     <Image className='w-full h-72 bg-purple-500' />
-                    <TouchableOpacity className='absolute bg-white top-8 left-4 p-2 rounded-full'>
-                        <Link href="/(tabs)"><Icon.ArrowLeft strokeWidth={3} color={"black"} /></Link>
+                    <TouchableOpacity
+                        className='absolute bg-white top-8 left-4 p-2 rounded-full'
+                        onPress={() => navigation.goBack()}
+                    >
+                        <Icon.ArrowLeft strokeWidth={3} color={"black"} />
                     </TouchableOpacity>
                 </View>
 

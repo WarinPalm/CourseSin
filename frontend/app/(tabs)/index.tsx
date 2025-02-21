@@ -30,17 +30,21 @@ const Home = () => {
       <View className='flex-1'>
 
         <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+          <View className="flex-row items-center ms-3 my-4">
+            <Icon.Book height="20" width="20" stroke="black"/>
+            <Text className='ms-2 font-bold text-xl'>หมวดหมู่</Text>
+          </View>
           <Category />
           {/* suggestion */}
           <View className='mt-3'>
             <View className='flex-row items-center justify-between px-4'>
               <View>
-                <Text className='font-bold text-lg'>Suggestion Course</Text>
-                <Text className="text-black text-xs">Top Course</Text>
+                <Text className='font-bold text-lg'>คอร์สแนะนำ</Text>
+                <Text className="text-black text-xs">ยอดนิยม</Text>
               </View>
               <TouchableOpacity>
                 <Link href="/screens/viewAll">
-                  <Text className='font-semibold text-black'>View All</Text>
+                  <Text className='font-semibold text-black'>ดูทั้งหมด</Text>
                 </Link>
               </TouchableOpacity>
             </View>
@@ -63,12 +67,13 @@ const Home = () => {
           <View className='mt-2'>
             <View className='flex-row items-center justify-between px-4'>
               <View>
-                <Text className='font-bold text-lg'>Courses</Text>
-                <Text className="text-black text-xs">all Course</Text>
+                <Text className='font-bold text-lg'>คอร์สเรียน</Text>
+                <Text className="text-black text-xs">คอร์สเรียนทั้งหมด</Text>
               </View>
               <TouchableOpacity>
                 <Link href="/screens/viewAll">
-                  <Text className='font-semibold text-black'>View All</Text>
+                  <Text className='font-semibold text-black'>ดูทั้งหมด</Text>
+          
                 </Link>
               </TouchableOpacity>
             </View>

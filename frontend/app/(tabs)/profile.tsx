@@ -2,18 +2,16 @@ import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import * as Icon from 'react-native-feather';
 import { Link } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Profile = () => {
     const [isActive, setIsActive] = useState('About');
     return (
-        <View className='flex-1'>
+        <SafeAreaView className='flex-1'>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 {/* button back */}
                 <View className='relative'>
                     <Image className='w-full h-40 bg-purple-500' />
-                    <TouchableOpacity className='absolute bg-white top-8 left-4 p-2 rounded-full'>
-                        <Link href="/(tabs)"><Icon.ArrowLeft strokeWidth={3} color={"black"} /></Link>
-                    </TouchableOpacity>
                 </View>
 
                 {/* Header */}
@@ -76,7 +74,7 @@ const Profile = () => {
                     )}
                 </View>
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }
 
