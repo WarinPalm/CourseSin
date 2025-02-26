@@ -4,7 +4,7 @@ import { Redirect, Slot } from 'expo-router'
 
 export default function AppLayout(){
     const loading = false;
-    const isLoggedIn = false; //true - login แล้ว, false - ยังไม่ login
+    const isLoggedIn = true; //true - login แล้ว, false - ยังไม่ login
     if(loading){
         return(
             <SafeAreaView className="bgwhite h-full flex justify-center items-center">

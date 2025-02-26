@@ -1,17 +1,26 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 import * as Icon from 'react-native-feather';
-import { Link } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import Cart from '../components/cart';
+import { useNavigation } from '@react-navigation/native';
 
-const Profile = () => {
+const CourseDetail = () => {
     const [isActive, setIsActive] = useState('About');
+    const navigation = useNavigation();
+
     return (
         <SafeAreaView className='flex-1'>
+            <Cart />
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 {/* button back */}
                 <View className='relative'>
-                    <Image className='w-full h-40 bg-purple-500' />
+                    <Image className='w-full h-72 bg-purple-500' />
+                    <TouchableOpacity
+                        className='absolute bg-white top-8 left-4 p-2 rounded-full'
+                        onPress={() => navigation.goBack()}
+                    >
+                        <Icon.ArrowLeft strokeWidth={3} color={"black"} />
+                    </TouchableOpacity>
                 </View>
 
                 {/* Header */}
@@ -19,19 +28,11 @@ const Profile = () => {
                     className='bg-white -mt-12 pt-6'
                 >
                     <View className='px-5'>
-                        <View className='flex-row items-center'>
-                            <TouchableOpacity
-                                className='p-1 rounded-full shadow border border-purple-900 bg-black mr-4'>
-                                <Image style={{ width: 60, height: 60 }} />
-                            </TouchableOpacity>
-                            <View>
-                                <Text className='text-3xl font-bold'>Profile Name</Text>
-                                <Text className='text-sm'>category</Text>
-                            </View>
-                        </View>
+                        <Text className='text-3xl font-bold'>Course Name</Text>
+                        <Text className='text-sm'>category</Text>
                     </View>
-                    <View className='mx-6 mt-5 border-b-4 border-purple-500'></View>
                 </View>
+
                 {/* body  */}
                 <View className='bg-white flex-1'>
                     <View className='px-8 my-5 flex-row justify-between'>
@@ -78,4 +79,4 @@ const Profile = () => {
     );
 }
 
-export default Profile;
+export default CourseDetail;
