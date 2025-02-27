@@ -31,7 +31,7 @@ const Home = () => {
 
         <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
           <View className="flex-row items-center ms-3 my-4">
-            <Icon.Book height="20" width="20" stroke="black"/>
+            <Icon.Book height="20" width="20" stroke="black" />
             <Text className='ms-2 font-bold text-xl'>หมวดหมู่</Text>
           </View>
           <Category />
@@ -73,7 +73,7 @@ const Home = () => {
               <TouchableOpacity>
                 <Link href="/screens/viewAll">
                   <Text className='font-semibold text-black'>ดูทั้งหมด</Text>
-          
+
                 </Link>
               </TouchableOpacity>
             </View>
