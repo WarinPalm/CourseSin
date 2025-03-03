@@ -1,4 +1,3 @@
-
 import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -7,10 +6,11 @@ import Category from '../components/category';
 import CourseCard from '../components/courseCard';
 import Navbar from '../components/navbar';
 import { Link } from 'expo-router';
+import icons from '@/constants/icons';
+
 import SuggestionCard from '../components/suggestionCard';
 
 const Home = () => {
-
   const courses = [
     { id: 1, name: 'CourseName1', description: 'Learn the basics of Python programming.', category: 'Programming' },
     { id: 2, name: 'CourseName2', description: 'Deep dive into React and its ecosystem.', category: 'Web Development' },
@@ -25,6 +25,7 @@ const Home = () => {
 
   return (
     <SafeAreaView className='bg-white flex-1'>
+      
       <Navbar />
       {/* main */}
       <View className='flex-1'>
@@ -42,11 +43,9 @@ const Home = () => {
                 <Text className='font-bold text-lg'>คอร์สแนะนำ</Text>
                 <Text className="text-black text-xs">ยอดนิยม</Text>
               </View>
-              <TouchableOpacity>
-                <Link href="/screens/viewAll">
-                  <Text className='font-semibold text-black'>ดูทั้งหมด</Text>
-                </Link>
-              </TouchableOpacity>
+              <Link href="/screens/viewAll">
+                <Text className='font-semibold text-black'>ดูทั้งหมด</Text>
+              </Link>
             </View>
 
             {/* card */}
@@ -70,12 +69,9 @@ const Home = () => {
                 <Text className='font-bold text-lg'>คอร์สเรียน</Text>
                 <Text className="text-black text-xs">คอร์สเรียนทั้งหมด</Text>
               </View>
-              <TouchableOpacity>
-                <Link href="/screens/viewAll">
-                  <Text className='font-semibold text-black'>ดูทั้งหมด</Text>
-
-                </Link>
-              </TouchableOpacity>
+              <Link href="/screens/viewAll">
+                <Text className='font-semibold text-black'>ดูทั้งหมด</Text>
+              </Link>
             </View>
             {/* card */}
             <View className='mt-2 px-4 flex-row flex-wrap'>

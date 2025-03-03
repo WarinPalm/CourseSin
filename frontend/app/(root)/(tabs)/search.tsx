@@ -5,6 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link } from 'expo-router';
 import Category from '../components/category';
 import CourseCard from '../components/courseCard';
+import SearchBar from '../components/searchBar';
+
 const Search = () => {
   const courses = [
     { id: 1, name: 'CourseName1', description: 'Learn the basics of Python programming.', category: 'Programming' },
@@ -19,14 +21,12 @@ const Search = () => {
   ];
   return (
     <SafeAreaView className='bg-white flex-1'>
-      <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom:20 }}>
         {/* search bar */}
-        <View className='flex-row items-center space-x-2 px-4 pb-2 mt-3'>
-          <View className='bg-white flex-row flex-1 items-center p-3 m-3 rounded-2xl border border-purple-900'>
-            <Icon.Search height="25" width="25" stroke="gray" />
-            <TextInput placeholder="Search for Course" className='ml-2 flex-1' />
-          </View>
+        <View className='mx-4 mb-5'>
+          <SearchBar />
         </View>
+
         <View className='flex-row items-center justify-between mx-9'>
           <TouchableOpacity className='flex-1 p-4 bg-purple-600 rounded-md mr-2'>
             <View className='flex-row items-center justify-center'>
@@ -49,7 +49,7 @@ const Search = () => {
           <Category />
         </View>
         {/* all course */}
-        <View className='mt-2'>
+        <View className='mt-2 flex-1'>
           <View className='flex-row items-center justify-between px-4'>
             <View>
               <Text className='font-bold text-lg'>คอร์สเรียน</Text>
@@ -58,7 +58,6 @@ const Search = () => {
             <TouchableOpacity>
               <Link href="/screens/viewAll">
                 <Text className='font-semibold text-black'>ดูทั้งหมด</Text>
-
               </Link>
             </TouchableOpacity>
           </View>
@@ -70,8 +69,6 @@ const Search = () => {
                 <CourseCard item={course} />
               </View>
             ))}
-
-
           </View>
         </View>
       </ScrollView>

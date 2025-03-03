@@ -1,7 +1,6 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { Tabs } from 'expo-router';
-
 import icons from "@/constants/icons";
 
 const TabIcon = ({ focused, icon, title }: { focused: boolean; icon: any, title: string }) => (
@@ -14,6 +13,7 @@ const TabIcon = ({ focused, icon, title }: { focused: boolean; icon: any, title:
         </Text>
     </View>
 )
+
 const TabsLayout = () => {
     return (
         <Tabs

@@ -1,79 +1,63 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity, ImageSourcePropType } from 'react-native';
 import React, { useState } from 'react';
-import * as Icon from 'react-native-feather';
+
 import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import icons from "@/constants/icons"
+
+interface SettingsItemProps{
+    icon: ImageSourcePropType;
+    title: string;
+    onPress: () => void;
+    textStyle?: string;
+    showArrow?: boolean;
+}
+
+const SettingsItem = ({ icon, title, onPress, textStyle, showArrow = true}:SettingsItemProps) =>{
+    return (
+        <TouchableOpacity onPress={onPress} className='flex flex-row items-center justify-between py-3'>
+            <View className='flex flex-row items-center gap-3'>
+                <Image source={icon} className='size-6'/>
+                <Text className={`text-lg font-rubik-medium text-black-300 ${textStyle}`}>{title}</Text>
+            </View>
+            {showArrow && <Image source={icons.rightArrow} className='size-5'/>}
+        </TouchableOpacity>
+    );
+}
 
 const Profile = () => {
-    const [isActive, setIsActive] = useState('About');
+    const handleLogout = () =>{};
+
     return (
-        <SafeAreaView className='flex-1'>
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                {/* button back */}
-                <View className='relative'>
-                    <Image className='w-full h-40 bg-purple-500' />
+        <SafeAreaView className='h-full bg-white'>
+            <ScrollView showsVerticalScrollIndicator={false}
+            contentContainerClassName='pb-32 px-7'>
+                <View className='flex flex-row items-center justify-between mt-5'>
+                    <Text className='text-xl font-rubik-bold'>
+                    Profile
+                    </Text>
+                    <Image source={icons.bell} className='size-5'/>
                 </View>
 
-                {/* Header */}
-                <View style={{ borderTopLeftRadius: 40, borderTopRightRadius: 40 }}
-                    className='bg-white -mt-12 pt-6'
-                >
-                    <View className='px-5'>
-                        <View className='flex-row items-center'>
-                            <TouchableOpacity
-                                className='p-1 rounded-full shadow border border-purple-900 bg-black mr-4'>
-                                <Image style={{ width: 60, height: 60 }} />
-                            </TouchableOpacity>
-                            <View>
-                                <Text className='text-3xl font-bold'>Profile Name</Text>
-                                <Text className='text-sm'>category</Text>
-                            </View>
-                        </View>
+                <View className='flex flex-row justify-center mt-5'>
+                    <View className='flex flex-col items-center relative mt-5'>
+                        <Image className='bg-purple-500 size-44 rounded-full'/>
+                        <TouchableOpacity className='absolute bottom-11 right-2'>
+                            <Image source={icons.edit} className='size-9'/>
+                        </TouchableOpacity>
+                        <Text className='text-2xl font-rubik-bold mt-2'>Warin Phromwaranon</Text>
                     </View>
-                    <View className='mx-6 mt-5 border-b-4 border-purple-500'></View>
                 </View>
-                {/* body  */}
-                <View className='bg-white flex-1'>
-                    <View className='px-8 my-5 flex-row justify-between'>
-                        <TouchableOpacity
-                            className={`p-2 ${isActive === 'About' ? 'border-b-4 border-purple-500' : ''}`}
-                            onPress={() => setIsActive('About')}
-                        >
-                            <Text className='font-bold text-xl'>About</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            className={`p-2 ${isActive === 'Video' ? 'border-b-4 border-purple-500' : ''}`}
-                            onPress={() => setIsActive('Video')}
-                        >
-                            <Text className='font-bold text-xl'>Video</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            className={`p-2 ${isActive === 'Benefit' ? 'border-b-4 border-purple-500' : ''}`}
-                            onPress={() => setIsActive('Benefit')}
-                        >
-                            <Text className='font-bold text-xl'>Benefit</Text>
-                        </TouchableOpacity>
-                    </View>
-                    {isActive === 'About' && (
-                        <View>
-                            <Text className='px-4 py-4 text-2xl font-bold'>Description :</Text>
-                        </View>
-                    )}
-                    {isActive === 'Video' && (
-                        <View>
-                            <Text className='px-4 py-4 text-2xl font-bold'>Video</Text>
-                            <View className='bg-purple-300 p-3 rounded-3xl shadow-2xl mb-3 mx-2'>
-                                <Image className='w-25 h-36' />
-                            </View>
-                        </View>
-                    )}
-                    {isActive === 'Benefit' && (
-                        <View>
-                            <Text className='px-4 py-4 text-2xl font-bold'>Benefit Content</Text>
-                        </View>
-                    )}
+
+                <View className='flex flex-col mt-10'>
+                    <SettingsItem icon={icons.calendar} title='My bookings' onPress={() => {}}/>
+                    <SettingsItem icon={icons.wallet} title='Payment' onPress={() => {}}/>
                 </View>
+
+              
+
             </ScrollView>
+            
         </SafeAreaView>
     );
 }
