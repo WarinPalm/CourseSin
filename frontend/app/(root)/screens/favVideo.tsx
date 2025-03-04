@@ -1,11 +1,11 @@
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import CourseCard from '../components/courseCard';
-import * as Icon from 'react-native-feather';
+
 import { useNavigation } from '@react-navigation/native';
 import icons from '@/constants/icons';
 
-const ViewAll = () => {
+const FavVideo = () => {
     const navigation = useNavigation();
     const courses = [
         { id: 1, name: 'CourseName1', channel: 'Channel 1', category: 'Programming' },
@@ -28,7 +28,7 @@ const ViewAll = () => {
                         className='absolute bg-white top-4 left-4 p-2 rounded-full z-10'>
                         <Image source={icons.backArrow} className='size-7'/>
                     </TouchableOpacity>
-                    <Text className='text-center font-brubik-bold text-xl mt-7'>Category: xxxxx</Text>
+                    <Text className='text-center font-rubik-bold text-xl mt-7'>Favorite Video</Text>
                 </View>
 
                 <View className='mt-5 px-3 flex-col'>
@@ -43,4 +43,4 @@ const ViewAll = () => {
     );
 }
 
-export default ViewAll;
+export default FavVideo;

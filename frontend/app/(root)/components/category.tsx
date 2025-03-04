@@ -29,10 +29,10 @@ const Category = () => {
                         <View key={index} className='flex items-center justify-center mr-6'>
                             <TouchableOpacity
                                 onPress={() => setActiveCategory(category.id)}
-                                className={`p-1 rounded-full shadow border border-purple-900 ${btnClass}`}>
+                                className={`p-1 rounded-full shadow border border-violet-900 ${btnClass}`}>
                                 <Image style={{ width: 45, height: 45 }} source={category.path} />
                             </TouchableOpacity>
-                            <Text className={`text-sm mt-1 ${textClass}`}>{category.name}</Text>
+                            <Text className={`font-rubik-semibold text-sm mt-2 ${textClass}`}>{category.name}</Text>
                         </View>
                     );
                 })}

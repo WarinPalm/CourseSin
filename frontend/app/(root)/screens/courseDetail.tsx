@@ -1,11 +1,11 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
-import * as Icon from 'react-native-feather';
 import Cart from '../components/cart';
+import icons from '@/constants/icons';
 import { useNavigation } from '@react-navigation/native';
 
 const CourseDetail = () => {
-    const [isActive, setIsActive] = useState('About');
+    const [isActive, setIsActive] = useState<string>('About');
     const navigation = useNavigation();
 
     return (
@@ -19,7 +19,7 @@ const CourseDetail = () => {
                         className='absolute bg-white top-8 left-4 p-2 rounded-full'
                         onPress={() => navigation.goBack()}
                     >
-                        <Icon.ArrowLeft strokeWidth={3} color={"black"} />
+                        <Image source={icons.backArrow} className='size-7'/>
                     </TouchableOpacity>
                 </View>
 
