@@ -1,5 +1,5 @@
 export interface Course {
-    id: number;
+    id: string;
     name: string;
     channel: string;
     category: string;
@@ -7,4 +7,5 @@ export interface Course {
 
 export interface CourseCardProps {
     item: Course;
+    onPress?:()=>void;
 }

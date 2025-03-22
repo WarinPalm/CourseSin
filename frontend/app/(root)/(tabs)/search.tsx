@@ -9,15 +9,15 @@ import SearchBar from '../components/searchBar';
 
 const Search = () => {
   const courses = [
-    { id: 1, name: 'CourseName1', channel: 'Channel 1', category: 'Programming' },
-    { id: 2, name: 'CourseName2', channel: 'Channel 2', category: 'Web Development' },
-    { id: 3, name: 'CourseName3', channel: 'Channel 3', category: 'Web Development' },
-    { id: 4, name: 'CourseName4', channel: 'Channel 4', category: 'Programming' },
-    { id: 5, name: 'CourseName5', channel: 'Channel 5', category: 'Programming' },
-    { id: 6, name: 'CourseName6', channel: 'Channel 6', category: 'Programming' },
-    { id: 7, name: 'CourseName7', channel: 'Channel 7', category: 'Programming' },
-    { id: 8, name: 'CourseName8', channel: 'Channel 8', category: 'Programming' },
-    { id: 9, name: 'CourseName9', channel: 'Channel 9', category: 'Programming' }
+    { id: '1', name: 'CourseName1', channel: 'Channel 1', category: 'Python' },
+    { id: '2', name: 'CourseName2', channel: 'Channel 2', category: 'React' },
+    { id: '3', name: 'CourseName3', channel: 'Channel 3', category: 'HTML' },
+    { id: '4', name: 'CourseName4', channel: 'Channel 4', category: 'CSS' },
+    { id: '5', name: 'CourseName5', channel: 'Channel 5', category: 'JavaScript' },
+    { id: '6', name: 'CourseName6', channel: 'Channel 6', category: 'TypeScript' },
+    { id: '7', name: 'CourseName7', channel: 'Channel 7', category: 'ReactNative' },
+    { id: '8', name: 'CourseName8', channel: 'Channel 8', category: 'C#' },
+    { id: '9', name: 'CourseName9', channel: 'Channel 9', category: 'C++' }
   ];
   return (
     <SafeAreaView className='bg-white flex-1'>
