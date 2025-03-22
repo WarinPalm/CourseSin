@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, ImageSourcePropType } from 'react-native';
 import React, { useState } from 'react';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import icons from "@/constants/icons"
 
@@ -48,27 +48,27 @@ const Profile = () => {
                     </View>
                 </View>
                 <View className='flex flex-row justify-between mx-16 mt-4'>
-                    <Link href="/screens/follower" asChild>
-                        <TouchableOpacity>
-                            <Text className='text-center font-rubik-bold'>200</Text>
-                            <Text className='text-xl font-rubik'>ผู้ติดตาม</Text>
-                        </TouchableOpacity>
-                    </Link>
-                    <Link href="/screens/follower" asChild>
-                        <TouchableOpacity>
-                            <Text className='text-center font-rubik-bold'>300</Text>
-                            <Text className='text-xl font-rubik'>กำลังติดตาม</Text>
-                        </TouchableOpacity>
-                    </Link>
+
+                    <TouchableOpacity onPress={() => router.push("/screens/follower")}>
+                        <Text className='text-center font-rubik-bold'>200</Text>
+                        <Text className='text-xl font-rubik'>ผู้ติดตาม</Text>
+                    </TouchableOpacity>
+
+
+                    <TouchableOpacity onPress={() => router.push("/screens/follower")}>
+                        <Text className='text-center font-rubik-bold'>300</Text>
+                        <Text className='text-xl font-rubik'>กำลังติดตาม</Text>
+                    </TouchableOpacity>
+
                 </View>
 
                 <View className='flex flex-col mt-10'>
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่ถูกใจ' onPress={() => router.push('/screens/favVideo')} />
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนของฉัน' onPress={() => router.push('/screens/myVideo')} />
-                    <SettingsItem icon={icons.wallet} title='สร้างวีดีโอของคุณเอง' onPress={() => { }} />
+                    <SettingsItem icon={icons.wallet} title='สร้างวีดีโอของคุณเอง' onPress={() => { router.push('/screens/create')}} />
                     <View className='border-b my-4'></View>
-                    <SettingsItem icon={icons.logout} title='ออกจากระบบ' textStyle='text-red-500' 
-                    showArrow={false} onPress={() => { }} />
+                    <SettingsItem icon={icons.logout} title='ออกจากระบบ' textStyle='text-red-500'
+                        showArrow={false} onPress={() => { }} />
                 </View>
             </ScrollView>
         </SafeAreaView>

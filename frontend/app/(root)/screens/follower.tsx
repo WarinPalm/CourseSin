@@ -2,7 +2,7 @@ import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import icons from '@/constants/icons'
-import { useNavigation } from '@react-navigation/native'
+import { useRouter } from 'expo-router'
 
 interface FollowerListProps {
     name: string;
@@ -32,14 +32,14 @@ const following = [
 
 const Follower = () => {
     const [isActive, setActive] = useState<string>("follower");
-    const navigation = useNavigation();
+    const router = useRouter();
 
     return (
         <SafeAreaView className="bg-white flex-1">
             <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
                 {/* button back */}
                 <View className="relative">
-                    <TouchableOpacity onPress={() => navigation.goBack()}
+                    <TouchableOpacity onPress={() => router.back()}
                         className="absolute bg-white top-4 left-4 p-2 rounded-full z-10">
                         <Image source={icons.backArrow} className="size-7" />
                     </TouchableOpacity>

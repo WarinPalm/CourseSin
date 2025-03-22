@@ -1,8 +1,7 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
-import { router, useLocalSearchParams } from 'expo-router';
 
-const Category = () => {
+const Category = ({ selectedCategory, setSelectedCategory }: { selectedCategory: string, setSelectedCategory: (category: string) => void }) => {
     const categories = [
         { id: '1', name: 'All', path: require('../../../assets/images/python.png') },
         { id: '2', name: 'Python', path: require('../../../assets/images/python.png') },
@@ -17,50 +16,35 @@ const Category = () => {
         { id: '11', name: 'C++', path: require('../../../assets/images/c++.png') }
     ];
 
-
-    const params = useLocalSearchParams<{ filter?: string }>();
-    const [selectedCategory, setSelectedCategory] = useState(params.filter || "All");
-
     const handleCategory = (category: string) => {
         if (selectedCategory === category) {
-            setSelectedCategory('All');
-            router.setParams({ filter: 'All' });
-            return;
-        };
-        setSelectedCategory(category);
-        router.setParams({ filter: category });
-    }
-
-
+            setSelectedCategory('All'); // รีเซ็ตเป็น All ถ้ากดซ้ำ
+        } else {
+            setSelectedCategory(category);
+        }
+    };
 
     return (
         <View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{ paddingHorizontal: 20 }}
-                className='overflow-visible'>
-                {categories.map((category, index) => {
-
-                    return (
-                        <View key={index} className='flex items-center justify-center mr-6'>
-                            <TouchableOpacity
-                                onPress={() => handleCategory(category.name)}
-                                className={`p-1 rounded-full shadow border border-violet-900 
-    ${selectedCategory === category.name ? 'bg-purple-300' : 'bg-gray-200'}`}>
-                                <Image style={{ width: 45, height: 45 }} source={category.path} />
-                            </TouchableOpacity>
-
-                            <Text className={`font-rubik-semibold text-sm mt-2 
-                            ${selectedCategory === category.name ? 'font-semibold text-purple-800' : 'text-black'}`}>
-                                {category.name}
-                            </Text>
-
-                        </View>
-                    );
-                })}
-
+                contentContainerStyle={{ paddingHorizontal: 20 }}>
+                {categories.map((category, index) => (
+                    <View key={index} className='flex items-center justify-center mr-6'>
+                        <TouchableOpacity
+                            onPress={() => handleCategory(category.name)}
+                            className={`p-1 rounded-full shadow border border-violet-900 
+        ${selectedCategory === category.name ? 'bg-purple-300' : 'bg-gray-200'}`}>
+                            <Image style={{ width: 45, height: 45 }} source={category.path} />
+                        </TouchableOpacity>
+                        <Text className={`font-rubik-semibold text-sm mt-2 
+                        ${selectedCategory === category.name ? 'font-semibold text-purple-800' : 'text-black'}`}>
+                            {category.name}
+                        </Text>
+                    </View>
+                ))}
             </ScrollView>
         </View>
     );
-}
+};
 
 export default Category;
