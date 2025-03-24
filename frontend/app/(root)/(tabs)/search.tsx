@@ -22,9 +22,10 @@ const Search = () => {
     { id: '4', name: 'CSS for Beginners', channel: 'Channel 4', category: 'CSS' },
     { id: '5', name: 'JavaScript Fundamentals', channel: 'Channel 5', category: 'JavaScript' },
     { id: '6', name: 'TypeScript Deep Dive', channel: 'Channel 6', category: 'TypeScript' },
-    { id: '7', name: 'React Hooks Explained', channel: 'Channel 7', category: 'ReactNative' },
-    { id: '8', name: 'C# for Unity', channel: 'Channel 8', category: 'C#' },
-    { id: '9', name: 'C++ Game Dev', channel: 'Channel 9', category: 'C++' }
+    { id: '7', name: 'TypeScript Deep Dive', channel: 'Channel 6', category: 'Flutter' },
+    { id: '8', name: 'React Hooks Explained', channel: 'Channel 7', category: 'React Native' },
+    { id: '9', name: 'C# for Unity', channel: 'Channel 8', category: 'C#' },
+    { id: '10', name: 'C++ Game Dev', channel: 'Channel 9', category: 'C++' }
   ];
 
   const filteredCourses = courses.filter(course =>

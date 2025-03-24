@@ -61,7 +61,7 @@ const Follower = () => {
                 </View>
 
                 {/* list follower / following */}
-                <View className="mt-5 px-4">
+                <View className="mt-5 px-2">
                     {isActive === "follower" ? (
                         followers.map((user) => <FollowerList key={user.id} name={user.name} />)
                     ) : (
