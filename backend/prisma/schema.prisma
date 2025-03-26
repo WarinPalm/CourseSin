@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id         String      @id @default(uuid())
+  f_name     String
+  l_name     String
+  picture    String?
+  email      String      @unique
+  password   String
+  course     Courses[]
+  like       Favorites[]
+  following  Follows[]   @relation(name: "UserFollowing")
+  Followers  Follows[]   @relation(name: "UserFollowers")
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+}
+
+model Categories {
+  id         String    @id @default(uuid())
+  name       String    @unique
+  course     Courses[]
+  created_at DateTime  @default(now())
+}
+
+model Courses {
+  id          String      @id @default(uuid())
+  tiile       String
+  description String?
+  benefit     String?
+  video_file  String
+  view        Int         @default(0)
+  Category    Categories  @relation(fields: [category], references: [id])
+  category    String
+  User        Users       @relation(fields: [channel], references: [id])
+  channel     String
+  like        Favorites[]
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+}
+
+model Favorites {
+  id         String   @id @default(uuid())
+  User       Users    @relation(fields: [channel], references: [id])
+  channel    String
+  Course     Courses  @relation(fields: [course], references: [id], onDelete: Cascade)
+  course     String
+  created_at DateTime @default(now())
+}
+
+model Follows {
+  id         String   @id @default(uuid())
+  Following  Users    @relation(name: "UserFollowing", fields: [following], references: [id])
+  following  String
+  Followers  Users    @relation(name: "UserFollowers", fields: [followers], references: [id])
+  followers  String
+  created_at DateTime @default(now())
+
+  @@unique([following, followers])
+}
