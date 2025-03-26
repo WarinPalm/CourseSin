@@ -1,14 +1,17 @@
-import { View, Text, ScrollView, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Cart from '../components/cart';
 import icons from '@/constants/icons';
-import { useLocalSearchParams, useRouter} from 'expo-router'
+import { useLocalSearchParams, useRouter } from 'expo-router'
 
-const Property = () => {
+const CourseDetails = () => {
   const [isActive, setIsActive] = useState<string>('About');
   const { id } = useLocalSearchParams<{ id?: string }>();
   const router = useRouter();
-
+  const handleClickUser = (id: string) => {
+    router.push(`/users/${id}`);
+  };
   return (
     <SafeAreaView className='flex-1'>
       <Cart />
@@ -37,6 +40,7 @@ const Property = () => {
         {/* body  */}
         <View className='bg-white flex-1'>
           <View className='px-8 my-5 flex-row justify-between'>
+            {/* tab */}
             <TouchableOpacity
               className={`p-2 ${isActive === 'About' ? 'border-b-4 border-violet-500' : ''}`}
               onPress={() => setIsActive('About')}
@@ -56,9 +60,17 @@ const Property = () => {
               <Text className='font-bold text-xl'>Benefit</Text>
             </TouchableOpacity>
           </View>
+
+          {/* detail in tab */}
           {isActive === 'About' && (
             <View>
               <Text className='px-4 py-4 text-2xl font-bold'>Description :</Text>
+              <Text className='px-4 mt-3 text-2xl font-bold'>Create By</Text>
+              <TouchableOpacity className="flex flex-row items-center px-6 py-3" 
+                onPress={() => handleClickUser('1')}>
+                <Image className="size-16 bg-violet-600 rounded-full border-2 border-white shadow-md" />
+                <Text className="text-lg font-semibold text-gray-800 ms-4">Name</Text>
+              </TouchableOpacity>
             </View>
           )}
           {isActive === 'Video' && (
@@ -80,4 +92,4 @@ const Property = () => {
   )
 }
 
-export default Property
+export default CourseDetails

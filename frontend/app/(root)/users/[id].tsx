@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, ImageSourcePropType } from 'react-native';
 import React, { useState } from 'react';
-import { useLocalSearchParams,useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import icons from "@/constants/icons"
 
@@ -12,40 +12,41 @@ interface SettingsItemProps {
     showArrow?: boolean;
 }
 
-const SettingsItem = ({ icon, title, onPress, textStyle, showArrow = true }: SettingsItemProps) => {
+const SettingsItem = ({ icon, title, onPress, showArrow = true }: SettingsItemProps) => {
     return (
         <TouchableOpacity onPress={onPress} className='flex flex-row items-center justify-between py-3'>
             <View className='flex flex-row items-center gap-3'>
                 <Image source={icon} className='size-6' />
-                <Text className={`text-lg font-rubik-medium text-black-300 ${textStyle}`}>{title}</Text>
+                <Text className={`text-lg font-rubik-medium text-black-300`}>{title}</Text>
             </View>
             {showArrow && <Image source={icons.rightArrow} className='size-5' />}
         </TouchableOpacity>
     );
 }
 
-const Profile = () => {
+const UserProfile = () => {
     const handleLogout = () => { };
     const { id } = useLocalSearchParams<{ id?: string }>();
-    const router =  useRouter();
+    const router = useRouter();
     return (
         <SafeAreaView className='h-full bg-white'>
+            <View className='relative'>
+                    <TouchableOpacity onPress={() => router.back()}
+                        className='absolute bg-white top-4 left-4 p-2 rounded-full z-10'>
+                        <Image source={icons.backArrow} className='size-7' />
+                    </TouchableOpacity>
+                    <Text className='text-center font-rubik-bold text-xl mt-7'></Text>
+                </View>
             <ScrollView showsVerticalScrollIndicator={false}
                 contentContainerClassName='pb-32 px-7'>
-                <View className='flex flex-row items-center justify-between mt-5'>
-                    <Text className='text-xl font-rubik-bold'>
-                        Profile
-                    </Text>
-                    <Image source={icons.bell} className='size-5' />
-                </View>
+                
+               
 
                 <View className='flex flex-row justify-center mt-5'>
                     <View className='flex flex-col items-center relative mt-5'>
                         <Image className='bg-violet-500 size-44 rounded-full' />
-                        <TouchableOpacity className='absolute bottom-11 right-2'>
-                            <Image source={icons.edit} className='size-9' />
-                        </TouchableOpacity>
-                        <Text className='text-2xl font-rubik-bold mt-2'>Warin Phromwaranon</Text>
+                        
+                        <Text className='text-2xl font-rubik-bold mt-2'>Warin Phromwaranon {1}</Text>
                     </View>
                 </View>
                 <View className='flex flex-row justify-between mx-16 mt-4'>
@@ -64,16 +65,13 @@ const Profile = () => {
                 </View>
 
                 <View className='flex flex-col mt-10'>
-                    <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่ถูกใจ' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />
-                    <SettingsItem icon={icons.wallet} title='คอร์สเรียนของฉัน' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />
-                    <SettingsItem icon={icons.wallet} title='สร้างวีดีโอของคุณเอง' onPress={() => { router.push('/screens/create')}} />
-                    <View className='border-b my-4'></View>
-                    <SettingsItem icon={icons.logout} title='ออกจากระบบ' textStyle='text-red-500'
-                        showArrow={false} onPress={() => { }} />
+                    <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่ถูกใจ' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />                    
+                    <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่เป็นเจ้าของ' onPress={() => router.push(`/screens/myVideo?id=${id}`)} />                    
+                    
                 </View>
             </ScrollView>
         </SafeAreaView>
     );
 }
 
-export default Profile;
+export default UserProfile;

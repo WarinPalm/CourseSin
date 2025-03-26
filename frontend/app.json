@@ -52,6 +52,9 @@
 
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "API_URL": "http://localhost:1337"
     }
   }
 }

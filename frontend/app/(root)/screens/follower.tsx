@@ -43,7 +43,7 @@ const Follower = () => {
                         className="absolute bg-white top-4 left-4 p-2 rounded-full z-10">
                         <Image source={icons.backArrow} className="size-7" />
                     </TouchableOpacity>
-                    <Text className="text-center font-rubik-bold text-xl mt-7">My Channel</Text>
+                    <Text className="text-center font-rubik-bold text-xl mt-7">List Follow</Text>
                 </View>
 
                 {/* Tab */}
