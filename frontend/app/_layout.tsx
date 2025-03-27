@@ -3,6 +3,7 @@ import './global.css'
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 
+
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     "Rubik-Bold": require("../assets/fonts/Rubik-Bold.ttf"),
@@ -18,7 +19,10 @@ export default function RootLayout() {
     }
   }, [fontsLoaded]);
 
-  if(!fontsLoaded) return null;
+  if (!fontsLoaded) return null;
 
-  return <Stack screenOptions={{headerShown:false}}/>;
+  return (
+    <Stack screenOptions={{ headerShown: false }} />
+
+  );
 }

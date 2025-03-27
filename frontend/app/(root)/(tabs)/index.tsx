@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Icon from 'react-native-feather';
 import axios from 'axios';
@@ -11,6 +11,7 @@ import Navbar from '../components/navbar';
 import { useRouter } from 'expo-router';
 import SuggestionCard from '../components/suggestionCard';
 import NoResults from '../components/NoResults';
+import useStore from '../store/store';
 
 const API_URL = Constants.expoConfig?.extra?.API_URL;
 
@@ -18,6 +19,7 @@ const Home = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const token = useStore((state) => state.token);
 
   const courses = [
     { id: '1', name: 'Python Basics', channel: 'Channel 1', category: 'Python', createBy: '1' },
@@ -35,7 +37,6 @@ const Home = () => {
   const handleCardClick = (id: string) => {
     router.push(`/properties/${id}`);
   };
-  
   
   return (
     <SafeAreaView className="bg-white pb-3 flex-1">
@@ -59,7 +60,8 @@ const Home = () => {
           <>
             {/* Navbar */}
             <Navbar />
-
+            <Text>{token}</Text>
+            {/* search bar */}
             {/* category */}
             <View className="flex-row items-center ms-3 my-4">
               <Icon.Book height={20} width={20} stroke="black" />

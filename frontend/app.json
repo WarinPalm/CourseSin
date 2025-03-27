@@ -54,7 +54,7 @@
       "typedRoutes": true
     },
     "extra": {
-      "API_URL": "http://localhost:1337"
+      "API_URL": "https://afraid-ends-talk.loca.lt/api"
     }
   }
 }

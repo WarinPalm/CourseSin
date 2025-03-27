@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useLocalSearchParams,useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import icons from "@/constants/icons"
+import useStore from '../store/store';
 
 interface SettingsItemProps {
     icon: ImageSourcePropType;
@@ -24,10 +25,15 @@ const SettingsItem = ({ icon, title, onPress, textStyle, showArrow = true }: Set
     );
 }
 
+
 const Profile = () => {
-    const handleLogout = () => { };
+
     const { id } = useLocalSearchParams<{ id?: string }>();
     const router =  useRouter();
+    const Logout = useStore(state => state.actionLogout);
+    const handleLogout = () => {
+        Logout();
+    };
     return (
         <SafeAreaView className='h-full bg-white'>
             <ScrollView showsVerticalScrollIndicator={false}
@@ -69,7 +75,7 @@ const Profile = () => {
                     <SettingsItem icon={icons.wallet} title='สร้างวีดีโอของคุณเอง' onPress={() => { router.push('/screens/create')}} />
                     <View className='border-b my-4'></View>
                     <SettingsItem icon={icons.logout} title='ออกจากระบบ' textStyle='text-red-500'
-                        showArrow={false} onPress={() => { }} />
+                        showArrow={false} onPress={handleLogout}/>
                 </View>
             </ScrollView>
         </SafeAreaView>
