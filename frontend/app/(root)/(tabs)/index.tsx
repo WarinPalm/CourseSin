@@ -19,8 +19,8 @@ const Home = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const token = useStore((state) => state.token);
-
+  // const token = useStore((state) => state.token);
+ 
   const courses = [
     { id: '1', name: 'Python Basics', channel: 'Channel 1', category: 'Python', createBy: '1' },
     { id: '2', name: 'React Native', channel: 'Channel 2', category: 'React', createBy: '2' },
@@ -60,7 +60,8 @@ const Home = () => {
           <>
             {/* Navbar */}
             <Navbar />
-            <Text>{token}</Text>
+            {/* <Text>{token}</Text> */}
+            
             {/* search bar */}
             {/* category */}
             <View className="flex-row items-center ms-3 my-4">

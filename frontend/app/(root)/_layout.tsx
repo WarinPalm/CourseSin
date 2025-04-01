@@ -3,11 +3,14 @@ import { Redirect, Slot, Stack } from 'expo-router';
 import React, { useEffect } from "react";
 import useStore from "./store/store";
 import { currentUser } from "./api/auth";
+import { useRouter, usePathname } from 'expo-router';
 
 export default function RootLayout() {
 
     const user = useStore((state) => state.user);
     const token = useStore((state) => state.token);
+    const router = useRouter();
+    const pathname = usePathname(); // ใช้ usePathname แทน
 
     useEffect(() => {
         if (user && token) {
@@ -19,7 +22,11 @@ export default function RootLayout() {
         }
     }, [user, token]); 
 
-    if (!user || !token) {
+    // ตรวจสอบว่าหน้า path เป็น register หรือไม่
+    const isRegisterPage = pathname === '/auth/register';
+
+   
+    if ((!user || !token) && !isRegisterPage) {
         return <Redirect href="/sign-in" />;
     }
     
