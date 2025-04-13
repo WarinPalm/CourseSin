@@ -44,30 +44,11 @@ const UserProfile = () => {
                 <View className='flex flex-row justify-center mt-5'>
                     <View className='flex flex-col items-center relative mt-5'>
                         <Image className='bg-violet-500 size-44 rounded-full' />
-                        <Text className='text-2xl font-rubik-bold mt-2'>Warin Phromwaranon</Text>
-                        <TouchableOpacity
-                            onPress={handleToggleFollow}
-                            className={`mt-3 px-6 py-2 rounded-full ${
-                                isFollowing ? 'bg-gray-400' : 'bg-blue-500'
-                            }`}
-                        >
-                            <Text className='text-white text-lg font-rubik-bold'>
-                                {isFollowing ? 'กำลังติดตาม' : 'ติดตาม'}
-                            </Text>
-                        </TouchableOpacity>
+                        <Text className='text-2xl font-rubik-bold mt-2'>Warin Phromwaranon {id}</Text>
+                       
                     </View>
                 </View>
 
-                <View className='flex flex-row justify-between mx-16 mt-4'>
-                    <TouchableOpacity onPress={() => router.push("/screens/follower")}>
-                        <Text className='text-center font-rubik-bold'>200</Text>
-                        <Text className='text-xl font-rubik'>ผู้ติดตาม</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => router.push("/screens/follower")}>
-                        <Text className='text-center font-rubik-bold'>300</Text>
-                        <Text className='text-xl font-rubik'>กำลังติดตาม</Text>
-                    </TouchableOpacity>
-                </View>
 
                 <View className='flex flex-col mt-10'>
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่ถูกใจ' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />

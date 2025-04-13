@@ -33,28 +33,32 @@
           "enableFullScreenImage_legacy": true
         }
       ],
-
-    [
-      "expo-font",
-      {
-        "fonts":[
-          "./assets/fonts/Rubik-Bold.ttf",
-          "./assets/fonts/Rubik-ExtraBold.ttf",
-          "./assets/fonts/Rubik-Medium.ttf",
-          "./assets/fonts/Rubik-Light.ttf",
-          "./assets/fonts/Rubik-Regular.ttf",
-          "./assets/fonts/Rubik-SemiBold.ttf"
-  
-        ]
-      }
-    ]
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Rubik-Bold.ttf",
+            "./assets/fonts/Rubik-ExtraBold.ttf",
+            "./assets/fonts/Rubik-Medium.ttf",
+            "./assets/fonts/Rubik-Light.ttf",
+            "./assets/fonts/Rubik-Regular.ttf",
+            "./assets/fonts/Rubik-SemiBold.ttf"
+          ]
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
+        }
+      ],
+      "expo-video"
     ],
-
     "experiments": {
       "typedRoutes": true
     },
     "extra": {
-      "API_URL": "https://cuddly-wings-work.loca.lt/api"
+      "API_URL": "https://five-tools-heal.loca.lt/api"
     }
   }
 }

@@ -20,7 +20,7 @@ const Home = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   // const token = useStore((state) => state.token);
- 
+
   const courses = [
     { id: '1', name: 'Python Basics', channel: 'Channel 1', category: 'Python', createBy: '1' },
     { id: '2', name: 'React Native', channel: 'Channel 2', category: 'React', createBy: '2' },
@@ -37,11 +37,11 @@ const Home = () => {
   const handleCardClick = (id: string) => {
     router.push(`/properties/${id}`);
   };
-  
+
   return (
     <SafeAreaView className="bg-white pb-3 flex-1">
       <FlatList
-        data={filteredCourses}
+        data={filteredCourses.slice(0, 3)}
         keyExtractor={(course) => course.id}
         renderItem={({ item }) => (
           <View className="w-100 px-3 p-2">
@@ -61,7 +61,7 @@ const Home = () => {
             {/* Navbar */}
             <Navbar />
             {/* <Text>{token}</Text> */}
-            
+
             {/* search bar */}
             {/* category */}
             <View className="flex-row items-center ms-3 my-4">
@@ -77,7 +77,7 @@ const Home = () => {
                   <Text className="font-rubik-bold text-lg">คอร์สแนะนำ</Text>
                   <Text className="font-rubik text-black text-xs">ยอดนิยม</Text>
                 </View>
-                <TouchableOpacity onPress={() => router.push('/screens/viewAll')}>
+                <TouchableOpacity onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}`)}>
                   <Text className="font-rubik-semibold text-black">ดูทั้งหมด</Text>
                 </TouchableOpacity>
               </View>
@@ -109,7 +109,7 @@ const Home = () => {
                   <Text className="font-rubik-bold text-lg">คอร์สเรียน</Text>
                   <Text className="font-rubik text-black text-xs">คอร์สเรียนทั้งหมด</Text>
                 </View>
-                <TouchableOpacity onPress={() => router.push('/screens/viewAll')}>
+                <TouchableOpacity onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}`)}>
                   <Text className="font-rubik-semibold text-black">ดูทั้งหมด</Text>
                 </TouchableOpacity>
               </View>

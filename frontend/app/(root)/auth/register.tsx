@@ -25,11 +25,10 @@ const Register = () => {
       return;
     }
 
-    console.log(form);
     try {
       await axios.post(`${API_URL}/register`, form);
       Alert.alert('Success', 'สมัครสมาชิกสำเร็จ');
-      setForm({ email: '', password: '', fName: '', lName: '' });
+      setForm({ email: "", password: "", fName: "", lName: "" });
       router.push('/sign-in');
     } catch (error) {
       console.log(error);

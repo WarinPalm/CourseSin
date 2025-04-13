@@ -46,7 +46,7 @@ const Search = () => {
   return (
     <SafeAreaView className="bg-white pb-3 flex-1">
       <FlatList
-        data={filteredCourses}
+        data={filteredCourses.slice(0,3)}
         keyExtractor={(course) => course.id}
         renderItem={({ item }) => (
           <View className="w-100 px-3 p-2">
@@ -100,7 +100,7 @@ const Search = () => {
                   <Text className="font-rubik-bold text-lg">คอร์สเรียน</Text>
                   <Text className="font-rubik text-black text-xs">คอร์สเรียนทั้งหมด</Text>
                 </View>
-                <TouchableOpacity onPress={() => router.push("/screens/viewAll")}>
+                <TouchableOpacity onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}`)}>
                   <Text className="font-rubik-semibold text-black">ดูทั้งหมด</Text>
                 </TouchableOpacity>
               </View>

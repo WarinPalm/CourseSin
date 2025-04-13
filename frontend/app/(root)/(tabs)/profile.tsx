@@ -44,7 +44,7 @@ const Profile = () => {
                     </Text>
                     <Image source={icons.bell} className='size-5' />
                 </View>
-
+                
                 <View className='flex flex-row justify-center mt-5'>
                     <View className='flex flex-col items-center relative mt-5'>
                         <Image className='bg-violet-500 size-44 rounded-full' />
@@ -54,22 +54,9 @@ const Profile = () => {
                         <Text className='text-2xl font-rubik-bold mt-2'>Warin Phromwaranon</Text>
                     </View>
                 </View>
-                <View className='flex flex-row justify-between mx-16 mt-4'>
-
-                    <TouchableOpacity onPress={() => router.push("/screens/follower")}>
-                        <Text className='text-center font-rubik-bold'>200</Text>
-                        <Text className='text-xl font-rubik'>ผู้ติดตาม</Text>
-                    </TouchableOpacity>
-
-
-                    <TouchableOpacity onPress={() => router.push("/screens/follower")}>
-                        <Text className='text-center font-rubik-bold'>300</Text>
-                        <Text className='text-xl font-rubik'>กำลังติดตาม</Text>
-                    </TouchableOpacity>
-
-                </View>
-
+                
                 <View className='flex flex-col mt-10'>
+                    
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่ถูกใจ' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนของฉัน' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />
                     <SettingsItem icon={icons.wallet} title='สร้างวีดีโอของคุณเอง' onPress={() => { router.push('/screens/create')}} />
