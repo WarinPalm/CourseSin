@@ -10,6 +10,12 @@ const uploadDirThumbnail = path.join(__dirname, '../uploads/video/thumbnail');
 if( !fs.existsSync(uploadDirProfile)){
     fs.mkdirSync(uploadDirProfile, { recursive: true });
 }
+if( !fs.existsSync(uploadDirVideo)){
+    fs.mkdirSync(uploadDirVideo, { recursive: true });
+}
+if( !fs.existsSync(uploadDirThumbnail)){
+    fs.mkdirSync(uploadDirThumbnail, { recursive: true });
+}
 
 const storageProfile = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -33,10 +39,10 @@ exports.uploadProfile = (req , res , next) => {
     })
 }
 
-const folders = ['../uploads/video', '../uploads/video/thumbnail'];
-folders.forEach(dir => {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-});
+// const folders = ['./uploads/video', './uploads/video/thumbnail'];
+// folders.forEach(dir => {
+//   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+// });
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

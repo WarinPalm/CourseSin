@@ -93,7 +93,7 @@ exports.listCourse = async (req , res) => {
         const page = Number(req.query.page) || 1;
         const limit = Number(req.query.limit) || 10;
 
-        const category_id = req.query.category;
+        const category_id = req.params.id;
 
         let courses ;
         if(!category_id){
@@ -108,6 +108,9 @@ exports.listCourse = async (req , res) => {
                     benefit : true,
                     video_file : true,
                     thumbnail : true,
+                    _count : {
+                        select : { like : true }
+                    },
                     Channel : {
                         select : { id : true , f_name : true , l_name : true , picture : true }
                     },
@@ -168,12 +171,11 @@ exports.getCourse = async (req , res) => {
                 benefit : true,
                 video_file : true,
                 thumbnail : true,
+                _count : { select : { like : true } },
                 Channel : {
                     select : { id : true , f_name : true , l_name : true , picture : true }
                 },
-                Category : {
-                    select : { id : true , name : true }
-                },
+                Category : { select : { id : true , name : true } },
                 created_at : true,
                 updated_at : true,
             }
@@ -246,22 +248,5 @@ exports.removeCourse = async (req , res) => {
     }
 }
 
-exports.viewCourse = async (req , res) => {
-    try{
-        const course_id = req.params.id;
-        const checkCourse = await prisma.courses.findFirst({
-            where : { id : course_id , status : true }
-        });
-        if(!checkCourse) return res.status(400).json({ message : 'Course not found'});
-        
-        const course = await prisma.courses.update({
-            where : { id : course_id },
-            data : { view : { increment : 1 } }
-        });
-        res.status(200).json({ message : 'View Course Success' , Course : course });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ message : 'Internal Server Error'});
-    }
-}
+
 
