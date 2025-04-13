@@ -1,4 +1,7 @@
 const prisma = require('../configs/prisma');
+const fs = require('fs');
+const path = require('path');
+
 
 
 exports.createCategory = async (req , res) => {
@@ -45,11 +48,24 @@ exports.createCourse = async (req , res) => {
         if(!title || !description || !benefit || !category_id ){
             return res.status(400).json({ message : 'All fields are required'});
         };
+
+        const checkCategory = await prisma.categories.findFirst({
+            where : { id : category_id }
+        });
+        if(!checkCategory) return res.status(400).json({ message : 'Category not found'});
         
         const checkCourse = await prisma.courses.findFirst({
             where : { title : title , category : category_id , channel : user_id }
         });
         if(checkCourse){
+            
+            fs.unlink(`./uploads/video/${req.files['video'][0].filename}`, (err) => {
+                    if (err) console.log("not found video", err);
+                });
+            fs.unlink(`./uploads/video/thumbnail/${req.files['thumbnail'][0].filename}`, (err) => {
+                    if (err) console.log("not found image", err);
+                });
+
             return res.status(400).json({ message : 'Course already exists'});
         };
         
@@ -58,7 +74,8 @@ exports.createCourse = async (req , res) => {
                 title : title,
                 description : description,
                 benefit : benefit,
-                video_file : req.file.filename,
+                video_file : req.files['video'][0].filename,
+                thumbnail : req.files['thumbnail'][0].filename,
                 category : category_id,
                 channel : user_id
             }
@@ -77,22 +94,94 @@ exports.listCourse = async (req , res) => {
         const limit = Number(req.query.limit) || 10;
 
         const category_id = req.query.category;
+
+        let courses ;
         if(!category_id){
-            const categories = await prisma.courses.findMany({
+            courses = await prisma.courses.findMany({
                 skip : (page - 1) * limit,
                 take : limit,
-                where : { status : true }
+                where : { status : true },
+                select : {
+                    id : true,
+                    title : true,
+                    description : true,
+                    benefit : true,
+                    video_file : true,
+                    thumbnail : true,
+                    Channel : {
+                        select : { id : true , f_name : true , l_name : true , picture : true }
+                    },
+                    Category : {
+                        select : { id : true , name : true }
+                    },
+                    created_at : true
+                }
             });
-            res.status(200).json({ Category : categories });
-        }else{
-            const categories = await prisma.courses.findMany({
-                where : { status : true , category : category_id },
-                skip : (page - 1) * limit,
-                take : limit,
-            });
-            res.status(200).json({ Category : categories });
         }
+        else{
+            const checkCategory = await prisma.categories.findFirst({
+                where : { id : category_id }
+            });
+
+            if (!checkCategory) return res.status(400).json({ message : 'Category not found'});
+
+            courses = await prisma.courses.findMany({
+                skip : (page - 1) * limit,
+                take : limit,
+                where : { status : true , category : category_id },
+                select : {
+                    id : true,
+                    title : true,
+                    description : true,
+                    benefit : true,
+                    video_file : true,
+                    thumbnail : true,
+                    Channel : {
+                        select : { id : true , f_name : true , l_name : true , picture : true }
+                    },
+                    Category : {
+                        select : { id : true , name : true }
+                    },
+                    created_at : true,
+                    updated_at : true,
+                }
+            });
+        }
+
+        res.status(200).json({ courses : courses });
+
     }catch (err){
+        console.log(err);
+        res.status(500).json({ message : 'Internal Server Error'});
+    }
+}
+exports.getCourse = async (req , res) => {
+    try{
+        const course_id = req.params.id;
+        const checkCourse = await prisma.courses.findFirst({
+            where : { id : course_id , status : true },
+            select : {
+                id : true,
+                title : true,
+                description : true,
+                benefit : true,
+                video_file : true,
+                thumbnail : true,
+                Channel : {
+                    select : { id : true , f_name : true , l_name : true , picture : true }
+                },
+                Category : {
+                    select : { id : true , name : true }
+                },
+                created_at : true,
+                updated_at : true,
+            }
+        });
+        
+        if(!checkCourse) return res.status(400).json({ message : 'Course not found'});
+        res.status(200).json({ Course : checkCourse });
+
+    }catch (err) {
         console.log(err);
         res.status(500).json({ message : 'Internal Server Error'});
     }

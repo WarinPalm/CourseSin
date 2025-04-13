@@ -39,11 +39,11 @@ model Courses {
   description String?     @db.Text
   benefit     String?
   video_file  String
-  view        Int         @default(0)
+  thumbnail   String?
   status      Boolean     @default(true)
   Category    Categories  @relation(fields: [category], references: [id])
   category    String
-  User        Users       @relation(fields: [channel], references: [id])
+  Channel     Users       @relation(fields: [channel], references: [id])
   channel     String
   like        Favorites[]
   created_at  DateTime    @default(now())
@@ -52,9 +52,9 @@ model Courses {
 
 model Favorites {
   id         String   @id @default(uuid())
-  User       Users    @relation(fields: [channel], references: [id])
+  Channel    Users    @relation(fields: [channel], references: [id])
   channel    String
-  Course     Courses  @relation(fields: [course], references: [id], onDelete: Cascade)
+  Course     Courses  @relation(fields: [course], references: [id])
   course     String
   created_at DateTime @default(now())
 }
