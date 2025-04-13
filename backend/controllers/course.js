@@ -75,14 +75,23 @@ exports.listCourse = async (req , res) => {
     try{    
         const page = Number(req.query.page) || 1;
         const limit = Number(req.query.limit) || 10;
-        const categories =await prisma.courses.findMany({
-            skip : (page - 1) * limit,
-            take : limit,
-            where : { status : true }
-        });
 
-        res.status(200).json({ Category : categories });
-
+        const category_id = req.query.category;
+        if(!category_id){
+            const categories = await prisma.courses.findMany({
+                skip : (page - 1) * limit,
+                take : limit,
+                where : { status : true }
+            });
+            res.status(200).json({ Category : categories });
+        }else{
+            const categories = await prisma.courses.findMany({
+                where : { status : true , category : category_id },
+                skip : (page - 1) * limit,
+                take : limit,
+            });
+            res.status(200).json({ Category : categories });
+        }
     }catch (err){
         console.log(err);
         res.status(500).json({ message : 'Internal Server Error'});
@@ -105,24 +114,12 @@ exports.editCourse = async (req , res) => {
             ...req.body
         };
 
-        let fileVideo = checkCourse.video_file;
-
-        if(req.file){
-            if(checkCourse.video_file){
-                fs.unlink(`uploads/Video/${checkCourse.video_file}`, (err) => {
-                    if (err) console.log("not found image", err);
-                });
-            }
-            fileVideo = req.file.filename;
-        }
-
         const course = await prisma.courses.update({
             where: { id :  course_id , status : true , channel : user_id },
             data : {
                 title : title,
                 description : description,
                 benefit : benefit,
-                video_file : fileVideo,
                 category : category_id
             }
         });

@@ -1,6 +1,7 @@
 ก่อนเริ่มรัน backend ให้ทำการ 
 
 npm install
+
 npx prisma migrate dev 
 
 แล้วทำการเข้า folder postman ทำการนำไป import ที่ postman 
