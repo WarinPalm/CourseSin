@@ -155,6 +155,7 @@ exports.listCourse = async (req , res) => {
         res.status(500).json({ message : 'Internal Server Error'});
     }
 }
+
 exports.getCourse = async (req , res) => {
     try{
         const course_id = req.params.id;
@@ -177,7 +178,7 @@ exports.getCourse = async (req , res) => {
                 updated_at : true,
             }
         });
-        
+
         if(!checkCourse) return res.status(400).json({ message : 'Course not found'});
         res.status(200).json({ Course : checkCourse });
 

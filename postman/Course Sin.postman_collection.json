@@ -37,7 +37,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"por@gmail.com\",\r\n    \"password\": \"por12345\"\r\n}",
+							"raw": "{\r\n    \"email\": \"por@gmail.com\",\r\n    \"password\": \"por123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -84,7 +84,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"C#\"\r\n}",
+							"raw": "{\r\n    \"name\": \"PHP\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -97,24 +97,12 @@
 				},
 				{
 					"name": "List all category",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"C#\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": "localhost:8000/api/category"
 					},
 					"response": []
@@ -135,7 +123,7 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "เรียน C# wimdow app",
+									"value": "test",
 									"type": "text"
 								},
 								{
@@ -145,8 +133,13 @@
 								},
 								{
 									"key": "benefit",
-									"value": "คอร์สนี้คุณจะได้เรียนเกี่ยวเนื้อหาที่ครอบครุม",
+									"value": "คุณจะเก่งขึ้น",
 									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/C:/Users/s6511/Pictures/Screenshots/Screenshot 2024-08-29 165612.png"
 								},
 								{
 									"key": "video",
@@ -191,24 +184,22 @@
 								{
 									"key": "benefit",
 									"value": "คอร์สนี้คุณจะได้เรียนเกี่ยวเนื้อหาที่ครอบครุม",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "video",
 									"type": "file",
-									"src": "/C:/Users/s6511/Videos/mailDemo.mp4",
-									"disabled": true
+									"src": "/C:/Users/s6511/Videos/mailDemo.mp4"
 								},
 								{
 									"key": "category_id",
 									"value": "f537bfec-36b4-49e8-89f3-a888f04a9cc2",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								}
 							]
 						},
-						"url": "localhost:8000/api/course/6cd1b36e-cd72-4d40-97a1-ff279cfee7e1"
+						"url": "localhost:8000/api/course/6cd1b36e-cd72-4d40-97a1-ff279cfee7e1",
+						"description": "/api/course/:id"
 					},
 					"response": []
 				},
@@ -223,7 +214,8 @@
 						},
 						"method": "PUT",
 						"header": [],
-						"url": "localhost:8000/api/remove-course/ec77da60-9e5d-4794-901f-64cbb84e87d5"
+						"url": "localhost:8000/api/remove-course/ec77da60-9e5d-4794-901f-64cbb84e87d5",
+						"description": "**/api/course/:id**"
 					},
 					"response": []
 				},
@@ -238,31 +230,108 @@
 						},
 						"method": "PUT",
 						"header": [],
-						"url": "localhost:8000/api/view-course/ec77da60-9e5d-4794-901f-64cbb84e87d5"
+						"url": "localhost:8000/api/view-course/ec77da60-9e5d-4794-901f-64cbb84e87d5",
+						"description": "/api/course/:id"
 					},
 					"response": []
 				},
 				{
 					"name": "List Course",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"C#\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						"url": {
+							"raw": "localhost:8000/api/course?category=f537bfec-36b4-49e8-89f3-a888f04a9cc2&page=1&limit=10",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"course"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "f537bfec-36b4-49e8-89f3-a888f04a9cc2"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
 								}
+							]
+						},
+						"description": "**api/course?category={category_id}&page=1&limit=10  \n  \nถ้าไม่ใส่ category_id ให้ลบให้เหลือแค่ page กับ limit ซึ่งจะเป็นการดึง course จากทุกหมวดหมู่**"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
 							}
 						},
-						"url": "localhost:8000/api/category"
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8000/api/course/d6fc5a3b-06d3-4994-ac51-12e9e14fd526"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "f_name",
+									"value": "Mr.",
+									"type": "text"
+								},
+								{
+									"key": "l_name",
+									"value": "Por",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "por123456",
+									"type": "text"
+								},
+								{
+									"key": "profile",
+									"type": "file",
+									"src": "/C:/Users/s6511/Pictures/Screenshots/Screenshot 2024-12-10 133243.png"
+								}
+							]
+						},
+						"url": "localhost:8000/api/profile"
 					},
 					"response": []
 				}
