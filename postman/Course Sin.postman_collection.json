@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "a40a579b-270e-494b-b30e-a28f5c51d91b",
+		"name": "Course Sin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36305586"
+	},
+	"item": [
+		{
+			"name": "Authen",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"por@gmail.com\",\r\n    \"password\": \"por12345\",\r\n    \"fName\": \"Mr.\",\r\n    \"lName\": \"por\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"por@gmail.com\",\r\n    \"password\": \"por12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Current User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0MjkxNjcyNywiZXhwIjoxNzQ1NTA4NzI3fQ.SsjnlRRWj9u0X5I_0qjWTe41d_wEfkTbZwRck3z2grg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"por@gmail.com\",\r\n    \"password\": \"por12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/current-user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "Add category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"C#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/category"
+					},
+					"response": []
+				},
+				{
+					"name": "List all category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"C#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/category"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDQ3OTYzNywiZXhwIjoxNzQ3MDcxNjM3fQ.vn97HqXrQhZ45kpQuoiWlzhhcvATxcEfdA63KldqtXs"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "เรียน C# wimdow app",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "สามารถเรียนได้อย่างสนุกสนาน ไม่น่าเบื่อ",
+									"type": "text"
+								},
+								{
+									"key": "benefit",
+									"value": "คอร์สนี้คุณจะได้เรียนเกี่ยวเนื้อหาที่ครอบครุม",
+									"type": "text"
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/C:/Users/s6511/Videos/mailDemo.mp4"
+								},
+								{
+									"key": "category_id",
+									"value": "f537bfec-36b4-49e8-89f3-a888f04a9cc2",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost:8000/api/course"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "เรียน C# .NET",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "สามารถเรียนได้อย่างสนุกสนาน ไม่น่าเบื่อและไม่แพงแค่ 150 บาท",
+									"type": "text"
+								},
+								{
+									"key": "benefit",
+									"value": "คอร์สนี้คุณจะได้เรียนเกี่ยวเนื้อหาที่ครอบครุม",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/C:/Users/s6511/Videos/mailDemo.mp4",
+									"disabled": true
+								},
+								{
+									"key": "category_id",
+									"value": "f537bfec-36b4-49e8-89f3-a888f04a9cc2",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": "localhost:8000/api/course/6cd1b36e-cd72-4d40-97a1-ff279cfee7e1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": "localhost:8000/api/remove-course/ec77da60-9e5d-4794-901f-64cbb84e87d5"
+					},
+					"response": []
+				},
+				{
+					"name": "View Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": "localhost:8000/api/view-course/ec77da60-9e5d-4794-901f-64cbb84e87d5"
+					},
+					"response": []
+				},
+				{
+					"name": "List Course",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"C#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/category"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

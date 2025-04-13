@@ -47,6 +47,18 @@ exports.uploadVideo = (req , res , next) => {
         if(err){
             return res.status(500).json({ message : 'Error uploading file' , error : err });
         }
+        if(!req.file){
+            return res.status(400).json({ message : 'No file uploaded' });
+        }
+        next();
+    })
+}
+
+exports.editVideo = (req , res , next) => {
+    uploadVideo.single('video') (req , res , (err) => {
+        if(err){
+            return res.status(500).json({ message : 'Error uploading file' , error : err });
+        }
         next();
     })
 }

@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { createCategory , listAllCategory } = require('../controllers/course');
+const { createCourse , listCourse , editCourse , removeCourse , viewCourse , createCategory , listAllCategory } = require('../controllers/course');
+const { uploadVideo , editVideo } = require('../middlewares/upload');
+const { authCheck } = require('../middlewares/authCheck');
 
-router.post('/course')
-router.get('/course')
-router.put('/course')
-router.delete('/course/:id')
+router.post('/course', authCheck , uploadVideo , createCourse );
+router.get('/course', authCheck , listCourse);
+router.put('/course/:id' , authCheck , editVideo , editCourse );
+router.put('/remove-course/:id' , authCheck , removeCourse );
+
+router.put('/view-course/:id' , authCheck , viewCourse );
 
 // back door
 router.post('/category', createCategory);
