@@ -83,7 +83,7 @@ const Profile = () => {
                 <View className='flex flex-col mt-10'>
 
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่ถูกใจ' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />
-                    <SettingsItem icon={icons.wallet} title='คอร์สเรียนของฉัน' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />
+                    <SettingsItem icon={icons.wallet} title='คอร์สเรียนของฉัน' onPress={() => router.push(`/screens/myVideo`)} />
                     <SettingsItem icon={icons.wallet} title='สร้างวีดีโอของคุณเอง' onPress={() => { router.push('/screens/create') }} />
                     <SettingsItem icon={icons.wallet} title='test' onPress={() => { router.push('/screens/imagePicker') }} />
                     <View className='border-b my-4'></View>

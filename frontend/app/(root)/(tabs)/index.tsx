@@ -17,6 +17,7 @@ const Home = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [categoryName, setCategoryName] = useState<string>('All');
   const token = useStore((state) => state.token);
   const [courses, setCourses] = useState<CourseType[]>();
 
@@ -56,7 +57,10 @@ const Home = () => {
         keyExtractor={(course) => course.id}
         renderItem={({ item }) => (
           <View className="w-100 px-3 p-2">
-            <CourseCard item={item} onPress={() => handleCardClick(item.id)} />
+            <CourseCard thumbnail={item.thumbnail} title={item.title}
+              f_name={item.Channel.f_name} l_name={item.Channel.l_name}
+              category_name={item.Category.name} onPress={() => handleCardClick(item.id)}
+            />
           </View>
         )}
         contentContainerStyle={{ paddingBottom: 60 }}
@@ -79,7 +83,9 @@ const Home = () => {
               <Icon.Book height={20} width={20} stroke="black" />
               <Text className="ms-2 font-bold text-xl">หมวดหมู่</Text>
             </View>
-            <Category selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+            <Category selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}
+              categoryName={categoryName} setCategoryName={setCategoryName}
+            />
 
             {/* suggestion */}
             <View className="mt-3">
@@ -88,7 +94,7 @@ const Home = () => {
                   <Text className="font-rubik-bold text-lg">คอร์สแนะนำ</Text>
                   <Text className="font-rubik text-black text-xs">ยอดนิยม</Text>
                 </View>
-                <TouchableOpacity onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}`)}>
+                <TouchableOpacity onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}&name=${encodeURIComponent(categoryName)}`)}>
                   <Text className="font-rubik-semibold text-black">ดูทั้งหมด</Text>
                 </TouchableOpacity>
               </View>
@@ -100,7 +106,9 @@ const Home = () => {
                   keyExtractor={(course) => course.id}
                   renderItem={({ item }) => (
 
-                    <SuggestionCard item={item} onPress={() => handleCardClick(item.id)} />
+                    <SuggestionCard thumbnail={item.thumbnail} title={item.title}
+                    f_name={item.Channel.f_name} l_name={item.Channel.l_name}
+                    category_name={item.Category.name} onPress={() => handleCardClick(item.id)}/>
 
                   )}
                   horizontal
@@ -112,7 +120,7 @@ const Home = () => {
                         <ActivityIndicator size="large" className="text-violet-500 mt-5" />
                       </View>
                     ) : (
-                        <NoResults />
+                      <NoResults />
                     )
                   }
                 />
@@ -126,7 +134,7 @@ const Home = () => {
                   <Text className="font-rubik-bold text-lg">คอร์สเรียน</Text>
                   <Text className="font-rubik text-black text-xs">คอร์สเรียนทั้งหมด</Text>
                 </View>
-                <TouchableOpacity onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}`)}>
+                <TouchableOpacity onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}&name=${encodeURIComponent(categoryName)}`)}>
                   <Text className="font-rubik-semibold text-black">ดูทั้งหมด</Text>
                 </TouchableOpacity>
               </View>

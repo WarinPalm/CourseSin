@@ -58,17 +58,22 @@ exports.getMyChannel = async (req , res) => {
         const user_id = req.users.id;
         const page = Number(req.query.page) || 1;
         const limit = Number(req.query.limit) || 10;
+
         const checkUser = await prisma.users.findFirst({
             where : { id : user_id },
             select : {
                 f_name : true,
                 l_name : true,
                 picture : true,
+                _count : {
+                    select : { course : true }
+                },
                 course : {
                     skip : (limit * page) - limit,
                     take : limit,
                     where : { status : true },
                     select : {
+                        id : true,
                         title : true,
                         description : true,
                         benefit : true,
@@ -79,13 +84,21 @@ exports.getMyChannel = async (req , res) => {
                             select : {
                                 like : true
                             }
+                        },
+                        Category : {
+                            select : { id : true , name : true }
                         }
                     }
                 }
             }
         });
         if(!checkUser) return res.status(400).json({ message : 'User not found'});
-        res.status(200).json({ channel : checkUser });
+        res.status(200).json({
+            total_course : checkUser._count.course,
+            total_pages : Math.ceil(checkUser._count.course / limit),
+            channel : checkUser,
+        });
+
     }catch (err) {
         console.log(err);
         res.status(500).json({ message : 'Internal Server Error'});
@@ -103,11 +116,15 @@ exports.watchChannel = async (req , res) => {
                 f_name : true,
                 l_name : true,
                 picture : true,
+                _count : {
+                    select : { course : true }
+                },
                 course : {
                     skip : (limit * page) - limit,
                     take : limit,
                     where : { status : true },
                     select : {
+                        id : true,
                         title : true,
                         description : true,
                         benefit : true,
@@ -118,13 +135,20 @@ exports.watchChannel = async (req , res) => {
                             select : {
                                 like : true
                             }
+                        },
+                        Category : {
+                            select : { id : true , name : true }
                         }
                     }
                 }
             }
         });
         if(!checkChannel) return res.status(400).json({ message : 'Channel not found'});
-        res.status(200).json({ channel : checkChannel });
+        res.status(200).json({
+            total_course : checkChannel._count.course,
+            total_pages : Math.ceil(checkChannel._count.course / limit),
+            channel : checkChannel,
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json({ message : 'Internal Server Error'});

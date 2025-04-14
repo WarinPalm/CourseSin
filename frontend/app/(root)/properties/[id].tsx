@@ -23,9 +23,9 @@ const CourseDetails = () => {
   const source = {
     uri: `${API_URL_WITHOUT_API}/uploads/video/${course?.video_file}`,
   };
-  console.log(source)
+  // console.log(source)
 
-  // Use the hook and get player instance
+
   const player = useVideoPlayer(source, (player) => {
     player.loop = true;
     player.staysActiveInBackground = true;
@@ -114,7 +114,7 @@ const CourseDetails = () => {
           {isActive === 'Video' && (
             <View>
               <Text className="px-4 py-4 text-2xl font-bold">Video</Text>
-              <View className="bg-purple-300 p-3 rounded-3xl shadow-2xl mb-3 mx-2">
+              <View className="bg-purple-700 p-3 rounded-3xl shadow-2xl mb-3 mx-2">
                 <VideoView
                   player={player}
                   style={{

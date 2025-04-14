@@ -19,9 +19,13 @@ const imageMap: Record<string, any> = {
 const Category = ({
   selectedCategory,
   setSelectedCategory,
+  categoryName,
+  setCategoryName,
 }: {
   selectedCategory: string;
-  setSelectedCategory: (category: string) => void;
+  setSelectedCategory: (categoryId: string) => void;
+  categoryName: string;
+  setCategoryName: (categoryName: string) => void;
 }) => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const [loading, setLoading] = useState(true);
@@ -41,11 +45,13 @@ const Category = ({
     fetchCategories();
   }, []);
 
-  const handleCategory = (category: string) => {
-    if (selectedCategory === category) {
+  const handleCategory = (categoryId: string, categoryName: string) => {
+    if (selectedCategory === categoryId) {
       setSelectedCategory('All');
+      setCategoryName('All');
     } else {
-      setSelectedCategory(category);
+      setSelectedCategory(categoryId);
+      setCategoryName(categoryName);
     }
   };
 
@@ -60,7 +66,7 @@ const Category = ({
           categories.map((category, index) => (
             <View key={index} className="flex items-center justify-center mr-6">
               <TouchableOpacity
-                onPress={() => handleCategory(category.id)}
+                onPress={() => handleCategory(category.id, category.name)}
                 className={`p-1 rounded-full shadow border border-violet-900 
                 ${selectedCategory === category.id ? 'bg-purple-300' : 'bg-gray-200'}`}>
                 <Image
@@ -69,7 +75,7 @@ const Category = ({
                 />
               </TouchableOpacity>
               <Text className={`font-rubik-semibold text-sm mt-2 
-                ${selectedCategory === category.name ? 'font-semibold text-purple-800' : 'text-black'}`}>
+                ${selectedCategory === category.id ? 'font-semibold text-purple-800' : 'text-black'}`}>
                 {category.name}
               </Text>
             </View>

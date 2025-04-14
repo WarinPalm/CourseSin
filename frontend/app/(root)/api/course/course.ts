@@ -28,7 +28,6 @@ export const addCourse = async (token: string, form: any) => {
     return await axios.post(`${API_URL}/course`, form, {
         headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
         }
     });
 }
@@ -40,9 +39,9 @@ export const getAllCoursePagination = async (token: string, page: number, limit:
         }
     });
 }
-export const getCatCoursePagination = async (token: string,page: number, limit: number) => {
+export const getCatCoursePagination = async (token: string,categoryId:string,page: number, limit: number) => {
     
-    return await axios.get(`${API_URL}/courses/?page=${page}&limit=${limit}`, {
+    return await axios.get(`${API_URL}/courses/${categoryId}?page=${page}&limit=${limit}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         }

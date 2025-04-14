@@ -64,8 +64,8 @@
       "typedRoutes": true
     },
     "extra": {
-      "API_URL": "https://heavy-sides-find.loca.lt/api",
-      "API_URL_WITHOUT_API":"https://heavy-sides-find.loca.lt"
+      "API_URL": "https://lemon-apples-act.loca.lt/api",
+      "API_URL_WITHOUT_API":"https://lemon-apples-act.loca.lt"
     }
   }
 }

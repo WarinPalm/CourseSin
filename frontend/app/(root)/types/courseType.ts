@@ -19,7 +19,11 @@ export interface CourseType {
 }
 
 export interface CourseCardProps {
-    item: CourseType;
+    thumbnail?:string;
+    title?:string;
+    f_name?:string;
+    l_name?:string;
+    category_name?:string;
     onPress?: () => void;
 }
 
