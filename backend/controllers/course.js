@@ -96,7 +96,9 @@ exports.listCourse = async (req , res) => {
         const category_id = req.params.id;
 
         let courses ;
+        let tolalCourse ;
         if(!category_id){
+            tolalCourse = await prisma.courses.count({ where : { status : true } });
             courses = await prisma.courses.findMany({
                 skip : (page - 1) * limit,
                 take : limit,
@@ -128,6 +130,7 @@ exports.listCourse = async (req , res) => {
 
             if (!checkCategory) return res.status(400).json({ message : 'Category not found'});
 
+            tolalCourse = await prisma.courses.count({ where : { status : true , category : category_id } });
             courses = await prisma.courses.findMany({
                 skip : (page - 1) * limit,
                 take : limit,
@@ -151,7 +154,11 @@ exports.listCourse = async (req , res) => {
             });
         }
 
-        res.status(200).json({ courses : courses });
+        res.status(200).json({ 
+            total_course : tolalCourse , 
+            total_pages : Math.ceil(tolalCourse / limit) , 
+            courses : courses 
+        });
 
     }catch (err){
         console.log(err);
