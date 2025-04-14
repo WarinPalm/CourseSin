@@ -22,8 +22,6 @@ model Users {
   password   String
   course     Courses[]
   like       Favorites[]
-  following  Follows[]   @relation(name: "UserFollowing")
-  Followers  Follows[]   @relation(name: "UserFollowers")
   created_at DateTime    @default(now())
   updated_at DateTime    @updatedAt
 }
@@ -37,14 +35,15 @@ model Categories {
 
 model Courses {
   id          String      @id @default(uuid())
-  tiile       String
-  description String?
+  title       String
+  description String?     @db.Text
   benefit     String?
   video_file  String
-  view        Int         @default(0)
+  thumbnail   String?
+  status      Boolean     @default(true)
   Category    Categories  @relation(fields: [category], references: [id])
   category    String
-  User        Users       @relation(fields: [channel], references: [id])
+  Channel     Users       @relation(fields: [channel], references: [id])
   channel     String
   like        Favorites[]
   created_at  DateTime    @default(now())
@@ -53,20 +52,9 @@ model Courses {
 
 model Favorites {
   id         String   @id @default(uuid())
-  User       Users    @relation(fields: [channel], references: [id])
+  Channel    Users    @relation(fields: [channel], references: [id])
   channel    String
-  Course     Courses  @relation(fields: [course], references: [id], onDelete: Cascade)
+  Course     Courses  @relation(fields: [course], references: [id])
   course     String
   created_at DateTime @default(now())
-}
-
-model Follows {
-  id         String   @id @default(uuid())
-  Following  Users    @relation(name: "UserFollowing", fields: [following], references: [id])
-  following  String
-  Followers  Users    @relation(name: "UserFollowers", fields: [followers], references: [id])
-  followers  String
-  created_at DateTime @default(now())
-
-  @@unique([following, followers])
 }

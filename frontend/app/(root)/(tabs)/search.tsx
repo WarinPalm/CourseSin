@@ -1,6 +1,6 @@
 // Search.tsx
 import { View, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Icon from 'react-native-feather';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
@@ -8,29 +8,44 @@ import Category from '../components/category';
 import CourseCard from '../components/courseCard';
 import SearchBar from '../components/searchBar';
 import NoResults from '../components/NoResults';
-
+import { getAllCourse, getCourseByCategory } from '../api/course/course';
+import { CourseType } from '../types/courseType';
+import useStore from '../store/store';
 const Search = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [searchText, setSearchText] = useState<string>(''); 
+  const token = useStore((state) => state.token);
+  const [courses, setCourses] = useState<CourseType[]>();
+  const [searchText, setSearchText] = useState<string>('');
 
-  const courses = [
-    { id: '1', name: 'Python Basics', channel: 'Channel 1', category: 'Python', createBy: '1' },
-    { id: '2', name: 'React Native', channel: 'Channel 2', category: 'React', createBy: '2' },
-    { id: '3', name: 'HTML Mastery', channel: 'Channel 3', category: 'HTML', createBy: '3' },
-    { id: '4', name: 'CSS for Beginners', channel: 'Channel 4', category: 'CSS', createBy: '4' },
-    { id: '5', name: 'JavaScript Fundamentals', channel: 'Channel 5', category: 'JavaScript', createBy: '5' },
-    { id: '6', name: 'TypeScript Deep Dive', channel: 'Channel 6', category: 'TypeScript', createBy: '6' },
-    { id: '7', name: 'Flutter', channel: 'Channel 6', category: 'Flutter', createBy: '7' },
-    { id: '8', name: 'React Hooks Explained', channel: 'Channel 7', category: 'React Native', createBy: '8' },
-    { id: '9', name: 'C# for Unity', channel: 'Channel 8', category: 'C#', createBy: '9' },
-    { id: '10', name: 'C++ Game Dev', channel: 'Channel 9', category: 'C++', createBy: '10' }
-  ];
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        if (!token) throw new Error('Token is required');
 
-  const filteredCourses = courses.filter(course =>
-    (selectedCategory === 'All' || course.category === selectedCategory) &&
-    course.name.toLowerCase().includes(searchText.toLowerCase())
+        setLoading(true);
+
+        if (selectedCategory === 'All') {
+          const res = await getAllCourse(token);
+          setCourses(res.data.courses);
+        } else {
+          const res = await getCourseByCategory(selectedCategory, token);
+          setCourses(res.data.courses);
+        }
+
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, [selectedCategory]);
+  const filteredCourses = courses?.filter(course =>
+    (selectedCategory === 'All' || course.Category.id === selectedCategory) &&
+    course.title.toLowerCase().includes(searchText.toLowerCase())
   );
 
 
@@ -46,7 +61,7 @@ const Search = () => {
   return (
     <SafeAreaView className="bg-white pb-3 flex-1">
       <FlatList
-        data={filteredCourses.slice(0,3)}
+        data={filteredCourses?.slice(0,3)}
         keyExtractor={(course) => course.id}
         renderItem={({ item }) => (
           <View className="w-100 px-3 p-2">

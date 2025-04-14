@@ -1,10 +1,11 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, ImageSourcePropType } from 'react-native';
-import React, { useState } from 'react';
-import { useLocalSearchParams,useRouter } from 'expo-router';
+import React, { useState, useEffect } from 'react';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import icons from "@/constants/icons"
 import useStore from '../store/store';
-
+import { getProfile } from '../api/user/user';
+import { ProfileType } from '../types/userType';
 interface SettingsItemProps {
     icon: ImageSourcePropType;
     title: string;
@@ -29,11 +30,27 @@ const SettingsItem = ({ icon, title, onPress, textStyle, showArrow = true }: Set
 const Profile = () => {
 
     const { id } = useLocalSearchParams<{ id?: string }>();
-    const router =  useRouter();
+    const [profile, setProfile] = useState<ProfileType>();
+    const token = useStore((state) => state.token);
+    const router = useRouter();
     const Logout = useStore(state => state.actionLogout);
     const handleLogout = () => {
         Logout();
     };
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                if (!token) throw new Error('Token is required');
+
+
+                const res = await getProfile(token);
+                setProfile(res.data.user);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        fetchProfile();
+    }, [profile])
     return (
         <SafeAreaView className='h-full bg-white'>
             <ScrollView showsVerticalScrollIndicator={false}
@@ -44,25 +61,34 @@ const Profile = () => {
                     </Text>
                     <Image source={icons.bell} className='size-5' />
                 </View>
-                
+
                 <View className='flex flex-row justify-center mt-5'>
                     <View className='flex flex-col items-center relative mt-5'>
-                        <Image className='bg-violet-500 size-44 rounded-full' />
-                        <TouchableOpacity className='absolute bottom-11 right-2'>
-                            <Image source={icons.edit} className='size-9' />
-                        </TouchableOpacity>
-                        <Text className='text-2xl font-rubik-bold mt-2'>Warin Phromwaranon</Text>
+                        <View className='relative'>
+                            <Image className='bg-violet-500 size-44 rounded-full' />
+                            <TouchableOpacity
+                                className='absolute bottom-1 right-2'
+                                onPress={() => router.push('/screens/editProfile')}
+                            >
+                                <Image source={icons.edit} className='size-9' />
+                            </TouchableOpacity>
+                        </View>
+                        <Text className='text-2xl font-rubik-bold mt-2 text-center'>
+                            {profile?.f_name} {profile?.l_name}
+                        </Text>
                     </View>
                 </View>
-                
+
+
                 <View className='flex flex-col mt-10'>
-                    
+
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่ถูกใจ' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนของฉัน' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />
-                    <SettingsItem icon={icons.wallet} title='สร้างวีดีโอของคุณเอง' onPress={() => { router.push('/screens/create')}} />
+                    <SettingsItem icon={icons.wallet} title='สร้างวีดีโอของคุณเอง' onPress={() => { router.push('/screens/create') }} />
+                    <SettingsItem icon={icons.wallet} title='test' onPress={() => { router.push('/screens/imagePicker') }} />
                     <View className='border-b my-4'></View>
                     <SettingsItem icon={icons.logout} title='ออกจากระบบ' textStyle='text-red-500'
-                        showArrow={false} onPress={handleLogout}/>
+                        showArrow={false} onPress={handleLogout} />
                 </View>
             </ScrollView>
         </SafeAreaView>

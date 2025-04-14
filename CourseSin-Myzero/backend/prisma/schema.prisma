@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id         String      @id @default(uuid())
+  f_name     String
+  l_name     String
+  picture    String?
+  email      String      @unique
+  password   String
+  course     Courses[]
+  like       Favorites[]
+  created_at DateTime    @default(now())
+  updated_at DateTime    @updatedAt
+}
+
+model Categories {
+  id         String    @id @default(uuid())
+  name       String    @unique
+  course     Courses[]
+  created_at DateTime  @default(now())
+}
+
+model Courses {
+  id          String      @id @default(uuid())
+  title       String
+  description String?     @db.Text
+  benefit     String?
+  video_file  String
+  thumbnail   String?
+  status      Boolean     @default(true)
+  Category    Categories  @relation(fields: [category], references: [id])
+  category    String
+  Channel     Users       @relation(fields: [channel], references: [id])
+  channel     String
+  like        Favorites[]
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+}
+
+model Favorites {
+  id         String   @id @default(uuid())
+  Channel    Users    @relation(fields: [channel], references: [id])
+  channel    String
+  Course     Courses  @relation(fields: [course], references: [id])
+  course     String
+  created_at DateTime @default(now())
+}

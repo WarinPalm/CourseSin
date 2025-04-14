@@ -2,8 +2,6 @@ import { View, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Icon from 'react-native-feather';
-import axios from 'axios';
-import Constants from 'expo-constants';
 
 import Category from '../components/category';
 import CourseCard from '../components/courseCard';
@@ -11,29 +9,42 @@ import Navbar from '../components/navbar';
 import { useRouter } from 'expo-router';
 import SuggestionCard from '../components/suggestionCard';
 import NoResults from '../components/NoResults';
+import { getAllCourse, getCourseByCategory } from '../api/course/course';
+import { CourseType } from '../types/courseType';
 import useStore from '../store/store';
-
-const API_URL = Constants.expoConfig?.extra?.API_URL;
 
 const Home = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  // const token = useStore((state) => state.token);
+  const token = useStore((state) => state.token);
+  const [courses, setCourses] = useState<CourseType[]>();
 
-  const courses = [
-    { id: '1', name: 'Python Basics', channel: 'Channel 1', category: 'Python', createBy: '1' },
-    { id: '2', name: 'React Native', channel: 'Channel 2', category: 'React', createBy: '2' },
-    { id: '3', name: 'HTML Mastery', channel: 'Channel 3', category: 'HTML', createBy: '3' },
-    { id: '4', name: 'CSS for Beginners', channel: 'Channel 4', category: 'CSS', createBy: '4' },
-    { id: '5', name: 'JavaScript Fundamentals', channel: 'Channel 5', category: 'JavaScript', createBy: '5' },
-    { id: '6', name: 'TypeScript Deep Dive', channel: 'Channel 6', category: 'TypeScript', createBy: '6' },
-    { id: '7', name: 'Flutter', channel: 'Channel 6', category: 'Flutter', createBy: '7' },
-    { id: '8', name: 'React Hooks Explained', channel: 'Channel 7', category: 'React Native', createBy: '8' },
-    { id: '9', name: 'C# for Unity', channel: 'Channel 8', category: 'C#', createBy: '9' },
-    { id: '10', name: 'C++ Game Dev', channel: 'Channel 9', category: 'C++', createBy: '10' }
-  ];
-  const filteredCourses = selectedCategory === 'All' ? courses : courses.filter(course => course.category === selectedCategory);
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        if (!token) throw new Error('Token is required');
+
+        setLoading(true);
+
+        if (selectedCategory === 'All') {
+          const res = await getAllCourse(token);
+          setCourses(res.data.courses);
+        } else {
+          const res = await getCourseByCategory(selectedCategory, token);
+          setCourses(res.data.courses);
+        }
+
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, [selectedCategory]);
+
   const handleCardClick = (id: string) => {
     router.push(`/properties/${id}`);
   };
@@ -41,7 +52,7 @@ const Home = () => {
   return (
     <SafeAreaView className="bg-white pb-3 flex-1">
       <FlatList
-        data={filteredCourses.slice(0, 3)}
+        data={courses?.slice(0, 3)}
         keyExtractor={(course) => course.id}
         renderItem={({ item }) => (
           <View className="w-100 px-3 p-2">
@@ -85,17 +96,23 @@ const Home = () => {
               {/* Suggestion Card */}
               <View className="py-5">
                 <FlatList
-                  data={filteredCourses}
+                  data={courses}
                   keyExtractor={(course) => course.id}
-                  renderItem={({ item }) => <SuggestionCard item={item} onPress={() => handleCardClick(item.id)} />}
+                  renderItem={({ item }) => (
+
+                    <SuggestionCard item={item} onPress={() => handleCardClick(item.id)} />
+
+                  )}
                   horizontal
                   showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={{ paddingHorizontal: 20 }}
+                  contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 10 }}
                   ListEmptyComponent={
                     loading ? (
-                      <ActivityIndicator size="large" className="text-violet-500 mt-5" />
+                      <View className="w-[300px] h-40 justify-center items-center">
+                        <ActivityIndicator size="large" className="text-violet-500 mt-5" />
+                      </View>
                     ) : (
-                      <NoResults />
+                        <NoResults />
                     )
                   }
                 />

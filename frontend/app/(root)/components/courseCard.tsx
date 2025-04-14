@@ -1,10 +1,13 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { Link } from 'expo-router';
-import { CourseCardProps } from '../types/cardType';
+import { CourseCardProps } from '../types/courseType';
 import icons from '@/constants/icons';
+import Constants from "expo-constants";
+const API_URL_WITHOUT_API = Constants.expoConfig?.extra?.API_URL_WITHOUT_API;
 
 const CourseCard: React.FC<CourseCardProps> = ({ item, onPress }) => {
+
     return (
 
         <TouchableOpacity onPress={onPress} className='bg-white rounded-3xl shadow-lg p-1 pb-3 flex-row'>
@@ -12,18 +15,19 @@ const CourseCard: React.FC<CourseCardProps> = ({ item, onPress }) => {
                 <Image
                     className="w-full bg-violet-500 rounded-3xl"
                     style={{ aspectRatio: 1.5, resizeMode: 'cover' }}
+                    source={{ uri: `${API_URL_WITHOUT_API}/uploads/video/thumbnail/${item.thumbnail}` }}
                 />
             </View>
 
             <View className='w-2/3 px-4 pb-4 space-y-2'>
-                <Text className='text-lg font-rubik-bold pt-3'>{item.name}</Text>
+                <Text className='text-lg font-rubik-bold pt-3'>{item.title}</Text>
                 <View className='flex-row items-center space-x-1'>
                     <Image className='w-4 h-4 bg-yellow-500' />
-                    <Text className='font-rubik text-sm ms-2 mt-1 text-gray-500'>{item.channel}</Text>
+                    <Text className='font-rubik text-sm ms-2 mt-1 text-gray-500'>{item.Channel.f_name} {item.Channel.l_name}</Text>
                 </View>
                 <View className='flex-row items-center space-x-1 pt-1'>
                     <Image source={icons.star} className='size-5' />
-                    <Text className='font-rubik text-sm ms-1 mt-1 text-gray-500'>4.5 . {item.category}</Text>
+                    <Text className='font-rubik text-sm ms-1 mt-1 text-gray-500'>4.5 . {item.Category.name}</Text>
                 </View>
 
             </View>

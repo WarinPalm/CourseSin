@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const { readdirSync } = require('fs');
 const path = require('path');
-const { port } = require('./configs/configenv') || 6001;
+const { port } = require('./configs/configenv');
 
 app.use(cors());
 app.use(morgan('dev'));

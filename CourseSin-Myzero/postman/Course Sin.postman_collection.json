@@ -1,0 +1,487 @@
+{
+	"info": {
+		"_postman_id": "a40a579b-270e-494b-b30e-a28f5c51d91b",
+		"name": "Course Sin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36305586"
+	},
+	"item": [
+		{
+			"name": "Authen",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"por@gmail.com\",\r\n    \"password\": \"por12345\",\r\n    \"fName\": \"Mr.\",\r\n    \"lName\": \"por\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"por@gmail.com\",\r\n    \"password\": \"por123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Current User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0MjkxNjcyNywiZXhwIjoxNzQ1NTA4NzI3fQ.SsjnlRRWj9u0X5I_0qjWTe41d_wEfkTbZwRck3z2grg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"por@gmail.com\",\r\n    \"password\": \"por12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/current-user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "Add category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"PHP\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/category"
+					},
+					"response": []
+				},
+				{
+					"name": "List all category",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8000/api/category"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDQ3OTYzNywiZXhwIjoxNzQ3MDcxNjM3fQ.vn97HqXrQhZ45kpQuoiWlzhhcvATxcEfdA63KldqtXs"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "สามารถเรียนได้อย่างสนุกสนาน ไม่น่าเบื่อ",
+									"type": "text"
+								},
+								{
+									"key": "benefit",
+									"value": "คุณจะเก่งขึ้น",
+									"type": "text"
+								},
+								{
+									"key": "thumbnail",
+									"type": "file",
+									"src": "/C:/Users/s6511/Pictures/Screenshots/Screenshot 2024-08-29 165612.png"
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/C:/Users/s6511/Videos/mailDemo.mp4"
+								},
+								{
+									"key": "category_id",
+									"value": "f537bfec-36b4-49e8-89f3-a888f04a9cc2",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost:8000/api/course"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "เรียน C# .NET",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "สามารถเรียนได้อย่างสนุกสนาน ไม่น่าเบื่อและไม่แพงแค่ 150 บาท",
+									"type": "text"
+								},
+								{
+									"key": "benefit",
+									"value": "คอร์สนี้คุณจะได้เรียนเกี่ยวเนื้อหาที่ครอบครุม",
+									"type": "text"
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/C:/Users/s6511/Videos/mailDemo.mp4"
+								},
+								{
+									"key": "category_id",
+									"value": "f537bfec-36b4-49e8-89f3-a888f04a9cc2",
+									"type": "text"
+								}
+							]
+						},
+						"url": "localhost:8000/api/course/6cd1b36e-cd72-4d40-97a1-ff279cfee7e1",
+						"description": "/api/course/:id"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"url": "localhost:8000/api/remove-course/ec77da60-9e5d-4794-901f-64cbb84e87d5",
+						"description": "**/api/course/:id**"
+					},
+					"response": []
+				},
+				{
+					"name": "List Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/courses/f537bfec-36b4-49e8-89f3-a888f04a9cc2?page=1&limit=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"courses",
+								"f537bfec-36b4-49e8-89f3-a888f04a9cc2"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						},
+						"description": "**api/course/params_category_id?page=1&limit=10\n\nถ้าไม่ใส่ category_id ให้ลบให้เหลือแค่ page กับ limit ซึ่งจะเป็นการดึง course จากทุกหมวดหมู่**"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8000/api/course/d6fc5a3b-06d3-4994-ac51-12e9e14fd526"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8000/api/profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Channel",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/my-channel?page=1&limit=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"my-channel"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "f_name",
+									"value": "Mr.",
+									"type": "text"
+								},
+								{
+									"key": "l_name",
+									"value": "Por",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "por123456",
+									"type": "text"
+								},
+								{
+									"key": "profile",
+									"type": "file",
+									"src": "/C:/Users/s6511/Pictures/Screenshots/Screenshot 2024-12-10 133243.png"
+								}
+							]
+						},
+						"url": "localhost:8000/api/profile"
+					},
+					"response": []
+				},
+				{
+					"name": "Watch Channel",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/watch-channel/cd5bc33d-25f1-427b-be92-571219038d10?page=1&limit=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"watch-channel",
+								"cd5bc33d-25f1-427b-be92-571219038d10"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favorite",
+			"item": [
+				{
+					"name": "list Favorite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDU2MjUwNywiZXhwIjoxNzQ3MTU0NTA3fQ.1g-4UDKXbXoBm5n9roocRV_Gyv3688l5-OEMu9rV17Q"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/api/favorites?page=1&limit=2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"favorites"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDU2MjUwNywiZXhwIjoxNzQ3MTU0NTA3fQ.1g-4UDKXbXoBm5n9roocRV_Gyv3688l5-OEMu9rV17Q"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"course_id\" : \"6cd1b36e-cd72-4d40-97a1-ff279cfee7e1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8000/api/favorite"
+					},
+					"response": []
+				},
+				{
+					"name": "Unlike",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDU2MjUwNywiZXhwIjoxNzQ3MTU0NTA3fQ.1g-4UDKXbXoBm5n9roocRV_Gyv3688l5-OEMu9rV17Q"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost:8000/api/favorite/6cd1b36e-cd72-4d40-97a1-ff279cfee7e1"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
