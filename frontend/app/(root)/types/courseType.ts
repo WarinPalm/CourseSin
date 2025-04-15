@@ -5,6 +5,9 @@ export interface CourseType {
     benefit: string;
     video_file: string;
     thumbnail: string;
+    _count:{
+        like:number
+    }
     Channel: {
         id: string;
         f_name: string;
@@ -24,6 +27,7 @@ export interface CourseCardProps {
     f_name?:string;
     l_name?:string;
     category_name?:string;
+    like?:number
     onPress?: () => void;
 }
 

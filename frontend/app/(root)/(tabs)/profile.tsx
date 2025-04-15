@@ -6,6 +6,10 @@ import icons from "@/constants/icons"
 import useStore from '../store/store';
 import { getProfile } from '../api/user/user';
 import { ProfileType } from '../types/userType';
+import Constants from "expo-constants";
+const API_URL_WITHOUT_API = Constants.expoConfig?.extra?.API_URL_WITHOUT_API;
+
+
 interface SettingsItemProps {
     icon: ImageSourcePropType;
     title: string;
@@ -65,7 +69,11 @@ const Profile = () => {
                 <View className='flex flex-row justify-center mt-5'>
                     <View className='flex flex-col items-center relative mt-5'>
                         <View className='relative'>
-                            <Image className='bg-violet-500 size-44 rounded-full' />
+
+                            <Image
+                                className='bg-violet-500 size-44 rounded-full'
+                                source={{ uri: `${API_URL_WITHOUT_API}/uploads/profile/${profile?.picture}` }}
+                            />
                             <TouchableOpacity
                                 className='absolute bottom-1 right-2'
                                 onPress={() => router.push('/screens/editProfile')}
@@ -82,7 +90,7 @@ const Profile = () => {
 
                 <View className='flex flex-col mt-10'>
 
-                    <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่ถูกใจ' onPress={() => router.push(`/screens/favVideo?id=${id}`)} />
+                    <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่ถูกใจ' onPress={() => router.push(`/screens/favVideo`)} />
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนของฉัน' onPress={() => router.push(`/screens/myVideo`)} />
                     <SettingsItem icon={icons.wallet} title='สร้างวีดีโอของคุณเอง' onPress={() => { router.push('/screens/create') }} />
                     <SettingsItem icon={icons.wallet} title='test' onPress={() => { router.push('/screens/imagePicker') }} />

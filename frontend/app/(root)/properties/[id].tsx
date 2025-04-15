@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, Dimensions, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Cart from '../components/cart';
+import LikeButton from '../components/LikeButton';
 import icons from '@/constants/icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useVideoPlayer, VideoView } from 'expo-video';
@@ -62,7 +62,10 @@ const CourseDetails = () => {
 
   return (
     <SafeAreaView className="flex-1">
-      <Cart />
+      {course?.id && token && (
+        <LikeButton courseId={course.id} token={token} />
+      )}
+
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {/* Back Button */}
         <View className="relative">
@@ -126,7 +129,7 @@ const CourseDetails = () => {
                   allowsPictureInPicture
                   startsPictureInPictureAutomatically
                 />
-              
+
               </View>
             </View>
           )}
@@ -145,15 +148,3 @@ const CourseDetails = () => {
 };
 
 export default CourseDetails;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  video: {
-    width: 300,
-    height: 200,
-    marginTop: 20,
-  },
-});

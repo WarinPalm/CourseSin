@@ -6,7 +6,7 @@ import icons from '@/constants/icons';
 import Constants from "expo-constants";
 const API_URL_WITHOUT_API = Constants.expoConfig?.extra?.API_URL_WITHOUT_API;
 
-const CourseCard: React.FC<CourseCardProps> = ({ thumbnail, title, f_name, l_name, category_name, onPress }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ thumbnail, title, f_name, l_name, category_name, like, onPress }) => {
     
     return (
 
@@ -27,7 +27,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ thumbnail, title, f_name, l_nam
                 </View>
                 <View className='flex-row items-center space-x-1 pt-1'>
                     <Image source={icons.star} className='size-5' />
-                    <Text className='font-rubik text-sm ms-1 mt-1 text-gray-500'>4.5 . {category_name}</Text>
+                    <Text className='font-rubik text-sm ms-1 mt-1 text-gray-500'>{like} . {category_name}</Text>
                 </View>
 
             </View>

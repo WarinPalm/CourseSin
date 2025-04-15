@@ -64,8 +64,8 @@
       "typedRoutes": true
     },
     "extra": {
-      "API_URL": "https://lemon-apples-act.loca.lt/api",
-      "API_URL_WITHOUT_API":"https://lemon-apples-act.loca.lt"
+      "API_URL": "https://nasty-rice-run.loca.lt/api",
+      "API_URL_WITHOUT_API":"https://nasty-rice-run.loca.lt"
     }
   }
 }

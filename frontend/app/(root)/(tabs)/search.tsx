@@ -66,9 +66,14 @@ const Search = () => {
         keyExtractor={(course) => course.id}
         renderItem={({ item }) => (
           <View className="w-100 px-3 p-2">
-            <CourseCard thumbnail={item.thumbnail} title={item.title}
-              f_name={item.Channel.f_name} l_name={item.Channel.l_name}
-              category_name={item.Category.name} onPress={() => handleCardClick(item.id)}
+            <CourseCard
+              thumbnail={item.thumbnail}
+              title={item.title}
+              f_name={item.Channel.f_name}
+              l_name={item.Channel.l_name}
+              category_name={item.Category.name}
+              like={item._count.like}
+              onPress={() => handleCardClick(item.id)}
             />
           </View>
         )}
@@ -89,7 +94,8 @@ const Search = () => {
 
             {/* bar */}
             <View className="flex-row items-center justify-between mx-9">
-              <TouchableOpacity className="flex-1 p-4 bg-purple-600 rounded-md mr-2">
+              <TouchableOpacity className="flex-1 p-4 bg-purple-600 rounded-md mr-2"
+                onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}&name=${encodeURIComponent(categoryName)}`)}>
                 <View className="flex-row items-center justify-center">
                   <Icon.Folder height={20} width={20} stroke="white" />
                   <Text className="font-rubik text-white ms-3">คอร์สเรียนทั้งหมด</Text>
@@ -109,8 +115,11 @@ const Search = () => {
                 <Icon.Book height={20} width={20} stroke="black" />
                 <Text className="ms-2 font-rubik-bold text-xl">หมวดหมู่</Text>
               </View>
-              <Category selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}
-                categoryName={categoryName} setCategoryName={setCategoryName}
+              <Category
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                categoryName={categoryName}
+                setCategoryName={setCategoryName}
               />
             </View>
 

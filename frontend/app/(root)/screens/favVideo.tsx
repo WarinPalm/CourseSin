@@ -1,26 +1,46 @@
 import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Image, FlatList, ActivityIndicator } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CourseCard from '../components/courseCard';
-import { useLocalSearchParams ,useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import icons from '@/constants/icons';
 import NoResults from '../components/NoResults';
+import useStore from '../store/store';
+import { listFavoritePagination } from '../api/favorite/favorite';
+import Pagination from '../components/Pagination';
 
 const FavVideo = () => {
     const [loading, setLoading] = useState<Boolean>(false);
     const router = useRouter();
-    const { id } = useLocalSearchParams<{ id?: string }>();
-    const courses = [
-        { id: '1', name: 'Python Basics', channel: 'Channel 1', category: 'Python', createBy: '1' },
-        { id: '2', name: 'React Native', channel: 'Channel 2', category: 'React', createBy: '2' },
-        { id: '3', name: 'HTML Mastery', channel: 'Channel 3', category: 'HTML', createBy: '3' },
-        { id: '4', name: 'CSS for Beginners', channel: 'Channel 4', category: 'CSS', createBy: '4' },
-        { id: '5', name: 'JavaScript Fundamentals', channel: 'Channel 5', category: 'JavaScript', createBy: '5' },
-        { id: '6', name: 'TypeScript Deep Dive', channel: 'Channel 6', category: 'TypeScript', createBy: '6' },
-        { id: '7', name: 'Flutter', channel: 'Channel 6', category: 'Flutter', createBy: '7' },
-        { id: '8', name: 'React Hooks Explained', channel: 'Channel 7', category: 'React Native', createBy: '8' },
-        { id: '9', name: 'C# for Unity', channel: 'Channel 8', category: 'C#', createBy: '9' },
-        { id: '10', name: 'C++ Game Dev', channel: 'Channel 9', category: 'C++', createBy: '10' }
-      ];
+    const token = useStore((state) => state.token);
+
+    //pagination
+    const [page, setPage] = useState<number>(1);
+    const [limit, setLimit] = useState<number>(5);
+    const [courses, setCourses] = useState<any>();
+    const [totalPage, setTotalPage] = useState<number>(0);
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                if (!token) throw new Error('Token is required');
+
+                setLoading(true);
+
+                const res = await listFavoritePagination(token, page, limit);
+                setCourses(res.data.favorites);
+                setTotalPage(res.data.total_pages)
+
+
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCourses();
+    }, [page, limit]);
+
     const handleCardClick = (id: string) => {
         router.push(`/properties/${id}`);
     }
@@ -34,7 +54,7 @@ const FavVideo = () => {
                     className='absolute bg-white top-4 left-4 p-2 rounded-full z-10'>
                     <Image source={icons.backArrow} className='size-7' />
                 </TouchableOpacity>
-                <Text className='text-center font-rubik-bold text-xl mt-7'>Favorite Video {id}</Text>
+                <Text className='text-center font-rubik-bold text-xl mt-7'>Favorite Video</Text>
             </View>
 
             {/* card */}
@@ -44,16 +64,27 @@ const FavVideo = () => {
                     keyExtractor={(course) => course.id}
                     renderItem={({ item }) => (
                         <View className='w-100 p-2'>
-                            <CourseCard item={item} onPress={() => handleCardClick(item.id)} />
+                            <CourseCard
+                                thumbnail={item.thumbnail}
+                                title={item.title}
+                                f_name={item.Channel.f_name}
+                                l_name={item.Channel.l_name}
+                                category_name={item.Category.name}
+                                onPress={() => handleCardClick(item.id)}
+                            />
                         </View>
                     )}
                     showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{ paddingBottom: 60 }}
+                    contentContainerStyle={{ paddingBottom: 100 }}
                     ListEmptyComponent={
                         loading ? (
-                            <ActivityIndicator size="large"
-                                className='text-violet-500 mt-5' />
+                            <ActivityIndicator size="large" className='text-violet-500 mt-5' />
                         ) : <NoResults />
+                    }
+                    ListFooterComponent={
+                        (totalPage > 1 || (courses && courses.length <= limit)) ? (
+                            <Pagination page={page} totalPage={totalPage || page + 1} setPage={setPage} limit={limit} setLimit={setLimit} />
+                        ) : null
                     }
                 />
             </View>

@@ -57,9 +57,14 @@ const Home = () => {
         keyExtractor={(course) => course.id}
         renderItem={({ item }) => (
           <View className="w-100 px-3 p-2">
-            <CourseCard thumbnail={item.thumbnail} title={item.title}
-              f_name={item.Channel.f_name} l_name={item.Channel.l_name}
-              category_name={item.Category.name} onPress={() => handleCardClick(item.id)}
+            <CourseCard
+              thumbnail={item.thumbnail}
+              title={item.title}
+              f_name={item.Channel.f_name}
+              l_name={item.Channel.l_name}
+              category_name={item.Category.name}
+              like={item._count.like}
+              onPress={() => handleCardClick(item.id)}
             />
           </View>
         )}
@@ -83,8 +88,11 @@ const Home = () => {
               <Icon.Book height={20} width={20} stroke="black" />
               <Text className="ms-2 font-bold text-xl">หมวดหมู่</Text>
             </View>
-            <Category selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}
-              categoryName={categoryName} setCategoryName={setCategoryName}
+            <Category
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              categoryName={categoryName}
+              setCategoryName={setCategoryName}
             />
 
             {/* suggestion */}
@@ -106,9 +114,15 @@ const Home = () => {
                   keyExtractor={(course) => course.id}
                   renderItem={({ item }) => (
 
-                    <SuggestionCard thumbnail={item.thumbnail} title={item.title}
-                    f_name={item.Channel.f_name} l_name={item.Channel.l_name}
-                    category_name={item.Category.name} onPress={() => handleCardClick(item.id)}/>
+                    <SuggestionCard
+                      thumbnail={item.thumbnail}
+                      title={item.title}
+                      f_name={item.Channel.f_name}
+                      l_name={item.Channel.l_name}
+                      category_name={item.Category.name}
+                      like={item._count.like}
+                      onPress={() => handleCardClick(item.id)}
+                    />
 
                   )}
                   horizontal

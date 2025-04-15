@@ -16,7 +16,21 @@ export const viewMyCourse = async (token: string, page: number, limit: number) =
         }
     });
 }
-export const editProfile = async (token: string, form:FormData) => {
+export const watchChannelProfile = async (token: string, channelId: string) => {
+    return await axios.get(`${API_URL}/watch-channel/${channelId}?`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+}
+export const watchChannelCourse = async (token: string, channelId: string, page: number, limit: number) => {
+    return await axios.get(`${API_URL}/watch-channel/${channelId}?page=${page}&limit=${limit}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+}
+export const editProfile = async (token: string, form: FormData) => {
     return await axios.put(`${API_URL}/profile`, form, {
         headers: {
             Authorization: `Bearer ${token}`,

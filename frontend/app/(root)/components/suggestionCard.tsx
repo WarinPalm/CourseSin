@@ -6,7 +6,7 @@ import icons from '@/constants/icons';
 import Constants from "expo-constants";
 const API_URL_WITHOUT_API = Constants.expoConfig?.extra?.API_URL_WITHOUT_API;
 
-const SuggestionCard: React.FC<CourseCardProps> = ({ thumbnail, title, f_name, l_name, category_name, onPress }) => {
+const SuggestionCard: React.FC<CourseCardProps> = ({ thumbnail, title, f_name, l_name, category_name, like, onPress}) => {
     return (
 
         <TouchableOpacity onPress={onPress}>
@@ -25,7 +25,7 @@ const SuggestionCard: React.FC<CourseCardProps> = ({ thumbnail, title, f_name, l
                     <Text className='text-lg font-rubik-bold mt-1'>{title}</Text>
                     <View className='flex-row items-center space-x-1'>
                         <Image source={icons.star} className='size-5' />
-                        <Text className='font-rubik text-sm ms-1 mt-1 text-gray-500'>4.5 . {category_name}</Text>
+                        <Text className='font-rubik text-sm ms-1 mt-1 text-gray-500'>{like} . {category_name}</Text>
                     </View>
                 </View>
             </View>

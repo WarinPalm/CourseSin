@@ -8,12 +8,15 @@ import { useLocalSearchParams } from 'expo-router';
 import Pagination from '../components/Pagination';
 import useStore from '../store/store';
 import { CourseType } from '../types/courseType';
-import { viewMyCourse } from '../api/user/user';
+import { watchChannelCourse } from '../api/user/user';
 
 
-const MyVideo = () => {
+const WatchVideo = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const token = useStore((state) => state.token);
+    const params = useLocalSearchParams();
+    const id = Array.isArray(params.category) ? params.category[0] : (params.id as string);
+    const fname = Array.isArray(params.name) ? params.name[0] : params.fname;
 
     //pagination
     const [page, setPage] = useState<number>(1);
@@ -30,12 +33,11 @@ const MyVideo = () => {
                 if (!token) throw new Error('Token is required');
 
                 setLoading(true);
-
-                const res = await viewMyCourse(token, page, limit);
+                const res = await watchChannelCourse(token, id as string, page, limit);
                 setCourses(res.data.channel.course);
                 setTotalPage(res.data.total_pages)
                 setUser({ f_name: res.data.channel.f_name, l_name: res.data.channel.l_name });
-                
+
             } catch (err) {
                 console.error(err);
             } finally {
@@ -56,7 +58,7 @@ const MyVideo = () => {
                 <TouchableOpacity onPress={() => router.back()} className='absolute bg-white top-4 left-4 p-2 rounded-full z-10'>
                     <Image source={icons.backArrow} className='size-7' />
                 </TouchableOpacity>
-                <Text className='text-center font-rubik-bold text-xl mt-7'>My Video</Text>
+                <Text className='text-center font-rubik-bold text-xl mt-7'>{fname}'s Video</Text>
             </View>
 
             <View className='mt-2 px-3'>
@@ -91,4 +93,4 @@ const MyVideo = () => {
     );
 };
 
-export default MyVideo;
+export default WatchVideo;
