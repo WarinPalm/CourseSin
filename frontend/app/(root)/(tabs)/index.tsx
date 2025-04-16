@@ -10,7 +10,7 @@ import { useRouter } from 'expo-router';
 import SuggestionCard from '../components/suggestionCard';
 import NoResults from '../components/NoResults';
 import { getAllCourse, getCourseByCategory } from '../api/course/course';
-import { CourseType } from '../types/courseType';
+import { CourseResponse } from '../types/responses/course';
 import useStore from '../store/store';
 
 const Home = () => {
@@ -19,7 +19,7 @@ const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [categoryName, setCategoryName] = useState<string>('All');
   const token = useStore((state) => state.token);
-  const [courses, setCourses] = useState<CourseType[]>();
+  const [courses, setCourses] = useState<CourseResponse[]>();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -63,7 +63,7 @@ const Home = () => {
               f_name={item.Channel.f_name}
               l_name={item.Channel.l_name}
               category_name={item.Category.name}
-              like={item._count.like}
+              like={item._count?.like}
               onPress={() => handleCardClick(item.id)}
             />
           </View>
@@ -120,7 +120,7 @@ const Home = () => {
                       f_name={item.Channel.f_name}
                       l_name={item.Channel.l_name}
                       category_name={item.Category.name}
-                      like={item._count.like}
+                      like={item._count?.like}
                       onPress={() => handleCardClick(item.id)}
                     />
 

@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 import { Link } from 'expo-router';
-import { CourseCardProps } from '../types/courseType';
+import { CourseCardProps } from '../types/responses/course';
 import icons from '@/constants/icons';
 import Constants from "expo-constants";
 const API_URL_WITHOUT_API = Constants.expoConfig?.extra?.API_URL_WITHOUT_API;

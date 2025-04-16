@@ -7,7 +7,7 @@ import NoResults from '../components/NoResults';
 import { useLocalSearchParams } from 'expo-router';
 import Pagination from '../components/Pagination';
 import useStore from '../store/store';
-import { CourseType } from '../types/courseType';
+import { ViewCourseResponse } from '../types/responses/course';
 import { watchChannelCourse } from '../api/user/user';
 
 
@@ -21,7 +21,7 @@ const WatchVideo = () => {
     //pagination
     const [page, setPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(5);
-    const [courses, setCourses] = useState<any>();
+    const [courses, setCourses] = useState<ViewCourseResponse[]>();
     const [totalPage, setTotalPage] = useState<number>(0);
     const [user, setUser] = useState<{ f_name: string, l_name: string } | null>(null);
 
@@ -67,9 +67,14 @@ const WatchVideo = () => {
                     keyExtractor={(course) => course.id}
                     renderItem={({ item }) => (
                         <View className='w-100 p-2'>
-                            <CourseCard thumbnail={item.thumbnail} title={item.title}
-                                f_name={user?.f_name} l_name={user?.l_name}
-                                category_name={item.Category.name} onPress={() => handleCardClick(item.id)}
+                            <CourseCard 
+                            thumbnail={item.thumbnail} 
+                            title={item.title}
+                                f_name={user?.f_name} 
+                                l_name={user?.l_name}
+                                category_name={item.Category.name} 
+                                like={item._count.like}
+                                onPress={() => handleCardClick(item.id)}
                             />
                         </View>
                     )}

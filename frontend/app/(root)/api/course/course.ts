@@ -1,7 +1,7 @@
 import axios from "axios";
 import Constants from "expo-constants";
 const API_URL = Constants.expoConfig?.extra?.API_URL;
-import { CourseForm } from "../../types/courseType";
+import { CourseForm } from "../../types/requests/course";
 
 export const getAllCourse = async (token: string) => {
     return await axios.get(`${API_URL}/courses`, {
@@ -24,10 +24,11 @@ export const getCourseById = async (id: string, token: string) => {
         }
     });
 }
-export const addCourse = async (token: string, form: any) => {
+export const addCourse = async (token: string, form: FormData) => {
     return await axios.post(`${API_URL}/course`, form, {
         headers: {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data', 
         }
     });
 }

@@ -142,6 +142,9 @@ exports.listCourse = async (req , res) => {
                     benefit : true,
                     video_file : true,
                     thumbnail : true,
+                    _count : {
+                        select : { like : true }
+                    },
                     Channel : {
                         select : { id : true , f_name : true , l_name : true , picture : true }
                     },

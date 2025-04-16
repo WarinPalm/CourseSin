@@ -7,7 +7,7 @@ import NoResults from '../components/NoResults';
 import { useLocalSearchParams } from 'expo-router';
 import Pagination from '../components/Pagination';
 import useStore from '../store/store';
-import { CourseType } from '../types/courseType';
+import { CourseResponse } from '../types/responses/course';
 import { getAllCoursePagination, getCatCoursePagination, getCourseByCategory } from '../api/course/course';
 
 const ViewAll = () => {
@@ -17,7 +17,7 @@ const ViewAll = () => {
     //pagination
     const [page, setPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(5);
-    const [courses, setCourses] = useState<CourseType[]>();
+    const [courses, setCourses] = useState<CourseResponse[]>();
     const [totalPage, setTotalPage] = useState<number>(0);
 
     const params = useLocalSearchParams();
@@ -80,6 +80,7 @@ const ViewAll = () => {
                                 f_name={item.Channel.f_name}
                                 l_name={item.Channel.l_name}
                                 category_name={item.Category.name}
+                                like={item._count?.like}
                                 onPress={() => handleCardClick(item.id)}
                             />
                         </View>

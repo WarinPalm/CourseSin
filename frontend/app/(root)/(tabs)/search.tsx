@@ -9,7 +9,7 @@ import CourseCard from '../components/courseCard';
 import SearchBar from '../components/searchBar';
 import NoResults from '../components/NoResults';
 import { getAllCourse, getCourseByCategory } from '../api/course/course';
-import { CourseType } from '../types/courseType';
+import { CourseResponse } from '../types/responses/course';
 import useStore from '../store/store';
 const Search = () => {
   const router = useRouter();
@@ -17,7 +17,7 @@ const Search = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [categoryName, setCategoryName] = useState<string>('All');
   const token = useStore((state) => state.token);
-  const [courses, setCourses] = useState<CourseType[]>();
+  const [courses, setCourses] = useState<CourseResponse[]>();
   const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const Search = () => {
               f_name={item.Channel.f_name}
               l_name={item.Channel.l_name}
               category_name={item.Category.name}
-              like={item._count.like}
+              like={item._count?.like}
               onPress={() => handleCardClick(item.id)}
             />
           </View>
@@ -101,7 +101,8 @@ const Search = () => {
                   <Text className="font-rubik text-white ms-3">คอร์สเรียนทั้งหมด</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity className="flex-1 p-4 bg-blue-600 rounded-md ml-2">
+              <TouchableOpacity className="flex-1 p-4 bg-blue-600 rounded-md ml-2"
+              onPress={()=> router.push(`/screens/popularCourse`)}>
                 <View className="flex-row items-center justify-center">
                   <Icon.Menu height={20} width={20} stroke="white" />
                   <Text className="font-rubik text-white ms-3">ช่องที่แนะนำ</Text>

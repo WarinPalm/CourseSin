@@ -6,7 +6,7 @@ import icons from '@/constants/icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import useStore from '../store/store';
-import { CourseType } from '../types/courseType';
+import { CourseResponse } from '../types/responses/course';
 import { getCourseById } from '../api/course/course';
 import { Video, ResizeMode } from 'expo-av';
 
@@ -18,7 +18,7 @@ const CourseDetails = () => {
   const { id } = useLocalSearchParams<{ id?: string }>();
   const router = useRouter();
   const token = useStore((state) => state.token);
-  const [course, setCourse] = useState<CourseType>();
+  const [course, setCourse] = useState<CourseResponse>();
   // Load video source
   const source = {
     uri: `${API_URL_WITHOUT_API}/uploads/video/${course?.video_file}`,
@@ -108,7 +108,8 @@ const CourseDetails = () => {
               <Text className="py-4 font-rubik">{course?.description}</Text>
               <Text className="mt-3 text-xl font-rubik-bold">Create By</Text>
               <TouchableOpacity className="flex flex-row items-center px-2 py-3" onPress={() => handleClickUser(`${course?.Channel.id}`)}>
-                <Image className="size-16 bg-violet-600 rounded-full border-2 border-white shadow-md" />
+                <Image className="size-16 bg-violet-600 rounded-full border-2 border-white shadow-md" 
+                source={{ uri: `${API_URL_WITHOUT_API}/uploads/profile/${course?.Channel.picture}` }}/>
                 <Text className="text-lg font-rubik-semibold text-gray-800 ms-4">{course?.Channel.f_name} {course?.Channel.l_name}</Text>
               </TouchableOpacity>
             </View>

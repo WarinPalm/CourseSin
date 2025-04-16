@@ -11,6 +11,7 @@ interface storageState {
   actionLogout: () => void;
 }
 
+
 const API_URL = Constants.expoConfig?.extra?.API_URL;
 
 const useStore = create<storageState>()(
@@ -18,6 +19,7 @@ const useStore = create<storageState>()(
     (set) => ({
       user: null,
       token: null,
+      categories: [],
 
       actionLogin: async (form) => {
         try {
@@ -27,9 +29,8 @@ const useStore = create<storageState>()(
           console.error(error);
         }
       },
-
       actionLogout: () => {
-        set({ user: null, token: null });
+        set({ user: null, token: null});
       },
     }),
     {

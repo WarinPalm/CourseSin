@@ -4,10 +4,9 @@ import CourseCard from '../components/courseCard';
 import { useRouter } from 'expo-router';
 import icons from '@/constants/icons';
 import NoResults from '../components/NoResults';
-import { useLocalSearchParams } from 'expo-router';
 import Pagination from '../components/Pagination';
 import useStore from '../store/store';
-import { CourseType } from '../types/courseType';
+import { ViewCourseResponse } from '../types/responses/course';
 import { viewMyCourse } from '../api/user/user';
 
 
@@ -18,7 +17,7 @@ const MyVideo = () => {
     //pagination
     const [page, setPage] = useState<number>(1);
     const [limit, setLimit] = useState<number>(5);
-    const [courses, setCourses] = useState<any>();
+    const [courses, setCourses] = useState<ViewCourseResponse[]>();
     const [totalPage, setTotalPage] = useState<number>(0);
     const [user, setUser] = useState<{ f_name: string, l_name: string } | null>(null);
 
@@ -35,7 +34,7 @@ const MyVideo = () => {
                 setCourses(res.data.channel.course);
                 setTotalPage(res.data.total_pages)
                 setUser({ f_name: res.data.channel.f_name, l_name: res.data.channel.l_name });
-                
+
             } catch (err) {
                 console.error(err);
             } finally {
@@ -65,10 +64,16 @@ const MyVideo = () => {
                     keyExtractor={(course) => course.id}
                     renderItem={({ item }) => (
                         <View className='w-100 p-2'>
-                            <CourseCard thumbnail={item.thumbnail} title={item.title}
-                                f_name={user?.f_name} l_name={user?.l_name}
-                                category_name={item.Category.name} onPress={() => handleCardClick(item.id)}
+                            <CourseCard
+                                thumbnail={item.thumbnail}
+                                title={item.title}
+                                f_name={user?.f_name}
+                                l_name={user?.l_name}
+                                category_name={item.Category.name}
+                                like={item._count?.like}
+                                onPress={() => handleCardClick(item.id)}
                             />
+                            
                         </View>
                     )}
                     showsVerticalScrollIndicator={false}

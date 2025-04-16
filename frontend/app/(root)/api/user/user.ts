@@ -34,7 +34,9 @@ export const editProfile = async (token: string, form: FormData) => {
     return await axios.put(`${API_URL}/profile`, form, {
         headers: {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data', 
         }
     });
 }
+
 

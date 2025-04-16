@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import icons from "@/constants/icons"
 import useStore from '../store/store';
 import { getProfile } from '../api/user/user';
-import { ProfileType } from '../types/userType';
+import { ProfileResponse } from '../types/responses/user';
 import Constants from "expo-constants";
 const API_URL_WITHOUT_API = Constants.expoConfig?.extra?.API_URL_WITHOUT_API;
 
@@ -32,9 +32,7 @@ const SettingsItem = ({ icon, title, onPress, textStyle, showArrow = true }: Set
 
 
 const Profile = () => {
-
-    const { id } = useLocalSearchParams<{ id?: string }>();
-    const [profile, setProfile] = useState<ProfileType>();
+    const [profile, setProfile] = useState<ProfileResponse>();
     const token = useStore((state) => state.token);
     const router = useRouter();
     const Logout = useStore(state => state.actionLogout);
@@ -45,8 +43,6 @@ const Profile = () => {
         const fetchProfile = async () => {
             try {
                 if (!token) throw new Error('Token is required');
-
-
                 const res = await getProfile(token);
                 setProfile(res.data.user);
             } catch (err) {
@@ -54,7 +50,7 @@ const Profile = () => {
             }
         }
         fetchProfile();
-    }, [profile])
+    }, [])
     return (
         <SafeAreaView className='h-full bg-white'>
             <ScrollView showsVerticalScrollIndicator={false}

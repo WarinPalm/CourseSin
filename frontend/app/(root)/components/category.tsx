@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { getAllCategory } from '../api/category/category';
-import { CategoryType } from '../types/categoryType';
+import { CategoryResponse } from '../types/responses/category';
 
 const imageMap: Record<string, any> = {
   'C#': require('../../../assets/images/C#.png'),
@@ -27,7 +27,7 @@ const Category = ({
   categoryName: string;
   setCategoryName: (categoryName: string) => void;
 }) => {
-  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [categories, setCategories] = useState<CategoryResponse[]>([]);
   const [loading, setLoading] = useState(true);
 
   const fetchCategories = async () => {

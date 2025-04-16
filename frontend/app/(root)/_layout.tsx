@@ -9,8 +9,7 @@ export default function RootLayout() {
 
     const user = useStore((state) => state.user);
     const token = useStore((state) => state.token);
-    const router = useRouter();
-    const pathname = usePathname(); // ใช้ usePathname แทน
+    const pathname = usePathname();
 
     useEffect(() => {
         if (user && token) {

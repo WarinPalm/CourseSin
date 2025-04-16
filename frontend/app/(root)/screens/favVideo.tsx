@@ -70,6 +70,7 @@ const FavVideo = () => {
                                 f_name={item.Channel.f_name}
                                 l_name={item.Channel.l_name}
                                 category_name={item.Category.name}
+                                like={item._count?.like}
                                 onPress={() => handleCardClick(item.id)}
                             />
                         </View>
