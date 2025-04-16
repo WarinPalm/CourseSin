@@ -32,10 +32,11 @@ exports.listFavaorite = async (req , res) => {
         const user_id = req.users.id;
         const page = Number(req.query.page) || 1;
         const limit = Number(req.query.limit) || 10;
-        const countFavorite = await prisma.favorites.count({ where : { channel : user_id } });
-        const favaorite = await prisma.favorites.findMany({
-            skip : (page - 1) * limit,
+        const total = await prisma.favorites.count({ where : { channel : user_id } });
+        const user = await prisma.users.findFirst({ where : { id : user_id } });
+        const favorite = await prisma.favorites.findMany({
             take : limit,
+            skip : (page - 1) * limit,
             where : { channel : user_id },
             include : {
                 Course : {
@@ -44,22 +45,36 @@ exports.listFavaorite = async (req , res) => {
                         title : true,
                         description : true,
                         benefit : true,
+                        video_file : true,
+                        thumbnail : true,
                         _count : { select : { like : true } },
                         Category : { select : { id : true , name : true } },
-                        Channel : {
-                            select : {
-                                id : true,
-                                f_name : true,
-                                l_name : true,
-                                picture : true
-                            }
-                        },
+                        // Channel : {
+                        //     select : {
+                        //         id : true,
+                        //         f_name : true,
+                        //         l_name : true,
+                        //         picture : true
+                        //     }
+                        // },
                         created_at : true,
                     }
                 }
             }
         });
-        res.status(201).json({ message : 'Like Course Success' , count : countFavorite , favorites : favaorite });
+
+    
+        res.status(201).json({ message : 'Like Course Success' , 
+            count : total , 
+            totalPage : Math.ceil(total / limit) ,   
+            channel : {
+                id : user.id,
+                f_name : user.f_name,
+                l_name : user.l_name,
+                picture : user.picture
+            } , 
+            favorites : favorite 
+        });
     }catch (err) {
         console.log(err);
         res.status(500).json({ message : 'Internal Server Error'});
@@ -78,6 +93,40 @@ exports.unLikeCourse = async (req , res) => {
             where : { channel : user_id , course : course_id }
         });
         res.status(200).json({ message : 'Unlike Course Success' });
+    }catch (err) {
+        console.log(err);
+        res.status(500).json({ message : 'Internal Server Error'});
+    }
+}
+
+exports.allCourse = async (req , res ) => {
+    try{
+        const courses = await prisma.courses.findMany({
+            include: {
+              Channel: {
+                select: {
+                  id: true,
+                  f_name: true,
+                  l_name: true,
+                  picture: true
+                }
+              },
+              Category: {
+                select: {
+                  id: true,
+                  name: true
+                }
+              },
+              _count: true // ✅ เพื่อให้ orderBy _count ทำงาน
+            },
+            orderBy: {
+              _count: {
+                like: 'desc'  // เรียงจากมาก -> น้อย
+              }
+            }
+          });
+          
+        res.status(200).json({ courses : courses });
     }catch (err) {
         console.log(err);
         res.status(500).json({ message : 'Internal Server Error'});
