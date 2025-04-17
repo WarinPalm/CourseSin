@@ -89,7 +89,6 @@ const Profile = () => {
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนที่ถูกใจ' onPress={() => router.push(`/screens/favVideo`)} />
                     <SettingsItem icon={icons.wallet} title='คอร์สเรียนของฉัน' onPress={() => router.push(`/screens/myVideo`)} />
                     <SettingsItem icon={icons.wallet} title='สร้างวีดีโอของคุณเอง' onPress={() => { router.push('/screens/create') }} />
-                    <SettingsItem icon={icons.wallet} title='test' onPress={() => { router.push('/screens/imagePicker') }} />
                     <View className='border-b my-4'></View>
                     <SettingsItem icon={icons.logout} title='ออกจากระบบ' textStyle='text-red-500'
                         showArrow={false} onPress={handleLogout} />

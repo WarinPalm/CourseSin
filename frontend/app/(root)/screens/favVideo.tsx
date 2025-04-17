@@ -18,6 +18,7 @@ const FavVideo = () => {
     const [limit, setLimit] = useState<number>(5);
     const [courses, setCourses] = useState<any>();
     const [totalPage, setTotalPage] = useState<number>(0);
+    const [user, setUser] = useState<{ f_name: string, l_name: string } | null>(null);
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -28,8 +29,8 @@ const FavVideo = () => {
 
                 const res = await listFavoritePagination(token, page, limit);
                 setCourses(res.data.favorites);
-                setTotalPage(res.data.total_pages)
-
+                setTotalPage(res.data.totalPage)
+                setUser({ f_name: res.data.channel.f_name, l_name: res.data.channel.l_name });
 
             } catch (err) {
                 console.error(err);
@@ -65,13 +66,13 @@ const FavVideo = () => {
                     renderItem={({ item }) => (
                         <View className='w-100 p-2'>
                             <CourseCard
-                                thumbnail={item.thumbnail}
-                                title={item.title}
-                                f_name={item.Channel.f_name}
-                                l_name={item.Channel.l_name}
-                                category_name={item.Category.name}
-                                like={item._count?.like}
-                                onPress={() => handleCardClick(item.id)}
+                                thumbnail={item.Course.thumbnail}
+                                title={item.Course.title}
+                                f_name={user?.f_name}
+                                l_name={user?.l_name}
+                                category_name={item.Course.Category.name}
+                                like={item.Course._count?.like}
+                                onPress={() => handleCardClick(item.Course.id)}
                             />
                         </View>
                     )}

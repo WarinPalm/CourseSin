@@ -12,7 +12,7 @@ import useStore from '../store/store';
 const Create = () => {
     const router = useRouter();
     const token = useStore((state) => state.token);
-
+    const [loading, setLoading] = useState<boolean>(false);
     const [categories, setCategories] = useState<CategoryResponse[]>([]);
     const [formCourse, setFormCourse] = useState({
         title: '',

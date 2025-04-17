@@ -65,9 +65,6 @@ exports.getMyChannel = async (req , res) => {
                 f_name : true,
                 l_name : true,
                 picture : true,
-                _count : {
-                    select : { course : true }
-                },
                 course : {
                     skip : (limit * page) - limit,
                     take : limit,
@@ -93,9 +90,10 @@ exports.getMyChannel = async (req , res) => {
             }
         });
         if(!checkUser) return res.status(400).json({ message : 'User not found'});
+        const countCourse = await prisma.courses.count({ where : { channel : user_id , status : true } }); 
         res.status(200).json({
-            total_course : checkUser._count.course,
-            total_pages : Math.ceil(checkUser._count.course / limit),
+            total_course : countCourse,
+            total_pages : Math.ceil(countCourse / limit),
             channel : checkUser,
         });
 
@@ -116,9 +114,6 @@ exports.watchChannel = async (req , res) => {
                 f_name : true,
                 l_name : true,
                 picture : true,
-                _count : {
-                    select : { course : true }
-                },
                 course : {
                     skip : (limit * page) - limit,
                     take : limit,
@@ -144,9 +139,10 @@ exports.watchChannel = async (req , res) => {
             }
         });
         if(!checkChannel) return res.status(400).json({ message : 'Channel not found'});
+        const countCourse = await prisma.courses.count({ where : { channel : channel_id , status : true } }); 
         res.status(200).json({
-            total_course : checkChannel._count.course,
-            total_pages : Math.ceil(checkChannel._count.course / limit),
+            total_course : countCourse,
+            total_pages : Math.ceil(countCourse / limit),
             channel : checkChannel,
         });
     } catch (err) {

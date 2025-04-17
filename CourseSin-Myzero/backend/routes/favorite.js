@@ -7,6 +7,6 @@ router.post('/favorite', authCheck , likeCourse);
 router.get('/favorites', authCheck , listFavaorite);
 router.delete('/favorite/:id', authCheck , unLikeCourse);
 
-router.get('/favorite/course', allCourse);
+
 
 module.exports = router;

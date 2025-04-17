@@ -37,7 +37,6 @@ const ViewAll = () => {
                     const res = await getAllCoursePagination(token, page, limit);
                     setCourses(res.data.courses);
                     setTotalPage(res.data.total_pages)
-                    console.log(totalPage)
                 } else {
 
                     const res = await getCatCoursePagination(token, categoryId, page, limit);

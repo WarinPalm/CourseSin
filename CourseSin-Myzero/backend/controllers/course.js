@@ -217,7 +217,7 @@ exports.editCourse = async (req , res) => {
         };
 
         const course = await prisma.courses.update({
-            where: { id :  course_id , status : true , channel : user_id },
+            where: { id :  course_id },
             data : {
                 title : title,
                 description : description,

@@ -1,4 +1,4 @@
-import { View, Text, Alert, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, Alert, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import axios from 'axios'
 import Constants from 'expo-constants'
@@ -7,6 +7,7 @@ import { useRouter } from 'expo-router'
 const API_URL = Constants.expoConfig?.extra?.API_URL;
 
 const Register = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
   const [form, setForm] = useState({
     email: '',
@@ -26,6 +27,7 @@ const Register = () => {
     }
 
     try {
+      setLoading(true);
       await axios.post(`${API_URL}/register`, form);
       Alert.alert('Success', 'สมัครสมาชิกสำเร็จ');
       setForm({ email: "", password: "", fName: "", lName: "" });
@@ -33,6 +35,8 @@ const Register = () => {
     } catch (error) {
       console.log(error);
       Alert.alert('Error', 'สมัครสมาชิกไม่สำเร็จ');
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -58,22 +62,29 @@ const Register = () => {
         placeholder="FirstName"
         value={form.fName}
         onChangeText={(text) => handleChange('fName', text)}
-      
+
       />
-       <TextInput
+      <TextInput
         className="border border-gray-300 p-3 rounded-lg mt-4"
         placeholder="LastName"
         value={form.lName}
         onChangeText={(text) => handleChange('lName', text)}
-  
+
       />
       <TouchableOpacity
         className="bg-violet-600 p-4 mt-6 rounded-lg items-center"
         onPress={handleSubmit}
       >
-        <Text className="text-white text-lg font-rubik-bold">
-          Sign Up
-        </Text>
+
+        {
+          loading ? (
+            <ActivityIndicator size="large" className="text-white" />
+          ) : (
+            <Text className="text-white text-lg font-rubik-bold">
+              Sign Up
+            </Text>
+          )
+        }
       </TouchableOpacity>
     </View>
   );

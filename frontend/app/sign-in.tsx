@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Image, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity, Alert, TextInput, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import images from "@/constants/images";
@@ -7,6 +7,7 @@ import useStore from './(root)/store/store';
 
 
 const SignIn = () => {
+    const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
     const actionLogin = useStore((state) => state.actionLogin);
     const user = useStore((state) => state.user);
@@ -17,7 +18,7 @@ const SignIn = () => {
 
     useEffect(() => {
         if (user) {
-            router.push('/'); 
+            router.push('/');
         }
     }, [user, router]);
 
@@ -30,13 +31,14 @@ const SignIn = () => {
             Alert.alert('Error', 'กรุณากรอกอีเมลและรหัสผ่าน');
             return;
         }
-
         try {
+            setLoading(true);
             await actionLogin(form);
             setForm({ email: '', password: '' });
         } catch (error) {
-            console.log(error);
             Alert.alert('Error', 'ไม่สามารถเข้าสู่ระบบได้ หรือคุณอาจใส่รหัสผิด');
+        } finally {
+            setLoading(false);
         }
     };
     return (
@@ -79,9 +81,16 @@ const SignIn = () => {
                         className="bg-blue-600 p-4 mt-6 rounded-lg items-center"
                         onPress={handleSubmit}
                     >
-                        <Text className="text-white text-lg font-rubik-bold">
-                            Log In
-                        </Text>
+                        {
+                            loading ? (
+                                <ActivityIndicator size="large" className="text-white" />
+                            ) : (
+                                <Text className="text-white text-lg font-rubik-bold">
+                                    Log In
+                                </Text>
+                            )
+                        }
+
                     </TouchableOpacity>
 
                     {/* Forgot Password */}
