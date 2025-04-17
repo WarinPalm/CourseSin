@@ -113,7 +113,7 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDQ3OTYzNywiZXhwIjoxNzQ3MDcxNjM3fQ.vn97HqXrQhZ45kpQuoiWlzhhcvATxcEfdA63KldqtXs"
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDg5Mjg1NCwiZXhwIjoxNzQ3NDg0ODU0fQ.STGDjQ5Eoe4LMvEhFbqPnQU9_CiO1W8iyknoq6dO5Ds"
 							}
 						},
 						"method": "POST",
@@ -123,7 +123,7 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "test",
+									"value": "final",
 									"type": "text"
 								},
 								{
@@ -139,12 +139,12 @@
 								{
 									"key": "thumbnail",
 									"type": "file",
-									"src": "/C:/Users/s6511/Pictures/Screenshots/Screenshot 2024-08-29 165612.png"
+									"src": "/C:/Users/s6511/Pictures/Screenshots/Screenshot 2024-09-17 115250.png"
 								},
 								{
 									"key": "video",
 									"type": "file",
-									"src": "/C:/Users/s6511/Videos/mailDemo.mp4"
+									"src": "/C:/Users/s6511/Videos/scrollingDemo.mp4"
 								},
 								{
 									"key": "category_id",
@@ -163,42 +163,21 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDUxMjc1NCwiZXhwIjoxNzQ3MTA0NzU0fQ.eR1pPrUMAY_1nSbZISpHlbC4pPtA07X8qXLdQowiUdw"
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDg5Mjg1NCwiZXhwIjoxNzQ3NDg0ODU0fQ.STGDjQ5Eoe4LMvEhFbqPnQU9_CiO1W8iyknoq6dO5Ds"
 							}
 						},
 						"method": "PUT",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "เรียน C# .NET",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "สามารถเรียนได้อย่างสนุกสนาน ไม่น่าเบื่อและไม่แพงแค่ 150 บาท",
-									"type": "text"
-								},
-								{
-									"key": "benefit",
-									"value": "คอร์สนี้คุณจะได้เรียนเกี่ยวเนื้อหาที่ครอบครุม",
-									"type": "text"
-								},
-								{
-									"key": "video",
-									"type": "file",
-									"src": "/C:/Users/s6511/Videos/mailDemo.mp4"
-								},
-								{
-									"key": "category_id",
-									"value": "f537bfec-36b4-49e8-89f3-a888f04a9cc2",
-									"type": "text"
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"test final1\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
-						"url": "localhost:8000/api/course/6cd1b36e-cd72-4d40-97a1-ff279cfee7e1",
+						"url": "localhost:8000/api/course/f8631baf-f847-433e-939f-eb6549cd82d2",
 						"description": "/api/course/:id"
 					},
 					"response": []
@@ -214,7 +193,7 @@
 						},
 						"method": "PUT",
 						"header": [],
-						"url": "localhost:8000/api/remove-course/ec77da60-9e5d-4794-901f-64cbb84e87d5",
+						"url": "localhost:8000/api/remove-course/f8631baf-f847-433e-939f-eb6549cd82d2",
 						"description": "**/api/course/:id**"
 					},
 					"response": []
@@ -231,15 +210,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/courses/f537bfec-36b4-49e8-89f3-a888f04a9cc2?page=1&limit=1",
+							"raw": "localhost:8000/api/courses?page=1&limit=10",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"api",
-								"courses",
-								"f537bfec-36b4-49e8-89f3-a888f04a9cc2"
+								"courses"
 							],
 							"query": [
 								{
@@ -248,7 +226,7 @@
 								},
 								{
 									"key": "limit",
-									"value": "1"
+									"value": "10"
 								}
 							]
 						},
@@ -303,7 +281,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/my-channel?page=1&limit=1",
+							"raw": "localhost:8000/api/my-channel?page=1&limit=2",
 							"host": [
 								"localhost"
 							],
@@ -319,7 +297,7 @@
 								},
 								{
 									"key": "limit",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -378,7 +356,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/watch-channel/cd5bc33d-25f1-427b-be92-571219038d10?page=1&limit=1",
+							"raw": "localhost:8000/api/watch-channel/cd5bc33d-25f1-427b-be92-571219038d10?page=1&limit=2",
 							"host": [
 								"localhost"
 							],
@@ -395,7 +373,7 @@
 								},
 								{
 									"key": "limit",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -413,7 +391,7 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDU2MjUwNywiZXhwIjoxNzQ3MTU0NTA3fQ.1g-4UDKXbXoBm5n9roocRV_Gyv3688l5-OEMu9rV17Q"
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkNWJjMzNkLTI1ZjEtNDI3Yi1iZTkyLTU3MTIxOTAzOGQxMCIsImVtYWlsIjoicG9yQGdtYWlsLmNvbSIsImlhdCI6MTc0NDgwMjg5NywiZXhwIjoxNzQ3Mzk0ODk3fQ.fVRex07VFePQ8U9-wXbm3x-Va-ZFzVsLd2J82G_fd7Q"
 							}
 						},
 						"method": "GET",
@@ -455,7 +433,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"course_id\" : \"6cd1b36e-cd72-4d40-97a1-ff279cfee7e1\"\r\n}",
+							"raw": "{\r\n    \"course_id\" : \"d6fc5a3b-06d3-4994-ac51-12e9e14fd526\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

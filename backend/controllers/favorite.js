@@ -98,37 +98,3 @@ exports.unLikeCourse = async (req , res) => {
         res.status(500).json({ message : 'Internal Server Error'});
     }
 }
-
-exports.allCourse = async (req , res ) => {
-    try{
-        const courses = await prisma.courses.findMany({
-            include: {
-              Channel: {
-                select: {
-                  id: true,
-                  f_name: true,
-                  l_name: true,
-                  picture: true
-                }
-              },
-              Category: {
-                select: {
-                  id: true,
-                  name: true
-                }
-              },
-              _count: true // ✅ เพื่อให้ orderBy _count ทำงาน
-            },
-            orderBy: {
-              _count: {
-                like: 'desc'  // เรียงจากมาก -> น้อย
-              }
-            }
-          });
-          
-        res.status(200).json({ courses : courses });
-    }catch (err) {
-        console.log(err);
-        res.status(500).json({ message : 'Internal Server Error'});
-    }
-}
