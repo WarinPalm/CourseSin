@@ -1,7 +1,7 @@
 import axios from "axios";
 import Constants from "expo-constants";
 const API_URL = Constants.expoConfig?.extra?.API_URL;
-import { CourseForm } from "../../types/requests/course";
+import { CourseForm, PayLoadEditCourse } from "../../types/requests/course";
 
 export const getAllCourse = async (token: string) => {
     return await axios.get(`${API_URL}/courses`, {
@@ -43,6 +43,22 @@ export const getAllCoursePagination = async (token: string, page: number, limit:
 export const getCatCoursePagination = async (token: string,categoryId:string,page: number, limit: number) => {
     
     return await axios.get(`${API_URL}/courses/${categoryId}?page=${page}&limit=${limit}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+}
+
+export const editCourse = async (token: string,id:string,form:PayLoadEditCourse ) => {
+    console.log(form)
+    return await axios.put(`${API_URL}/course/${id}`, form, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    });
+}
+export const deleteCourse = async (token: string,id:string) => {
+    return await axios.put(`${API_URL}/remove-course/${id}`,{},{
         headers: {
             Authorization: `Bearer ${token}`,
         }

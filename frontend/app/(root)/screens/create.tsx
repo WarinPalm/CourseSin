@@ -27,16 +27,16 @@ const Create = () => {
         setFormCourse({ ...formCourse, [key]: value });
     };
 
-    const fetchCategories = async () => {
-        try {
-            const res = await getAllCategory();
-            setCategories(res.data.Category);
-        } catch (err) {
-            console.error(err);
-        }
-    };
-
+    
     useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const res = await getAllCategory();
+                setCategories(res.data.Category);
+            } catch (err) {
+                console.error(err);
+            }
+        };
         fetchCategories();
     }, []);
 
