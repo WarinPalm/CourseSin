@@ -5,7 +5,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import icons from '@/constants/icons';
 import NoResults from '../components/NoResults';
 import useStore from '../store/store';
-import { listFavoritePagination } from '../api/favorite/favorite';
+import { listFavoritePagination } from '@/app/(root)/api/favorite/favorite';
 import Pagination from '../components/Pagination';
 
 const FavVideo = () => {
@@ -84,7 +84,7 @@ const FavVideo = () => {
                         ) : <NoResults />
                     }
                     ListFooterComponent={
-                        (totalPage > 1 || (courses && courses.length <= limit)) ? (
+                        (totalPage > 1 || (courses && courses.length > 0 && courses.length <= limit)) ? (
                             <Pagination page={page} totalPage={totalPage || page + 1} setPage={setPage} limit={limit} setLimit={setLimit} />
                         ) : null
                     }

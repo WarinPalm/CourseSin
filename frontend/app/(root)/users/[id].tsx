@@ -4,7 +4,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import icons from "@/constants/icons";
 import useStore from '../store/store';
-import { watchChannelCourse, watchChannelProfile } from '../api/user/user';
+import { watchChannelCourse, watchChannelProfile } from '@/app/(root)/api/user/user';
 import Constants from "expo-constants";
 const API_URL_WITHOUT_API = Constants.expoConfig?.extra?.API_URL_WITHOUT_API;
 

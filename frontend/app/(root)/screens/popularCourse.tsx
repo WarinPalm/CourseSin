@@ -8,7 +8,7 @@ import { useLocalSearchParams } from 'expo-router';
 import Pagination from '../components/Pagination';
 import useStore from '../store/store';
 import { CourseResponse } from '../types/responses/course';
-import { getAllCoursePagination } from '../api/course/course';
+import { getAllCoursePagination } from '@/app/(root)/api/course/course';
 
 type sortLike = {
     _count: { like: number; }; 
@@ -88,7 +88,7 @@ const PopularCourse = () => {
                         ) : <NoResults />
                     }
                     ListFooterComponent={
-                        (totalPage > 1 || (courses && courses.length <= limit)) ? (
+                        (totalPage > 1 || (courses && courses.length > 0 && courses.length <= limit)) ? (
                             <Pagination page={page} totalPage={totalPage || page + 1} setPage={setPage} limit={limit} setLimit={setLimit} />
                         ) : null
                     }

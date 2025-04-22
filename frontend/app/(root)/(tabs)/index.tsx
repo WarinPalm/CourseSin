@@ -9,7 +9,7 @@ import Navbar from '../components/navbar';
 import { useRouter } from 'expo-router';
 import SuggestionCard from '../components/suggestionCard';
 import NoResults from '../components/NoResults';
-import { getAllCourse, getCourseByCategory } from '../api/course/course';
+import { getAllCourse, getCourseByCategory } from '@/app/(root)/api/course/course';
 import { CourseResponse } from '../types/responses/course';
 import useStore from '../store/store';
 

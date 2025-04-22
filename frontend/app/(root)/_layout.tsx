@@ -2,7 +2,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Redirect, Slot, Stack } from 'expo-router';
 import React, { useEffect } from "react";
 import useStore from "./store/store";
-import { currentUser } from "./api/auth/auth";
+import { currentUser } from "@/app/(root)/api/auth/auth";
 import { useRouter, usePathname } from 'expo-router';
 
 export default function RootLayout() {

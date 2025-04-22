@@ -5,7 +5,6 @@ import images from "@/constants/images";
 import { useRouter } from 'expo-router';
 import useStore from './(root)/store/store';
 
-
 const SignIn = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
@@ -41,62 +40,67 @@ const SignIn = () => {
             setLoading(false);
         }
     };
+
     return (
         <SafeAreaView className="bg-white h-full">
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                <Image source={images.onboarding} className="w-full h-3/6" resizeMode="contain" />
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
+                <View className="flex-1 justify-center px-8 pb-12">
+                    <Image source={images.onboarding} className="w-full h-60 mb-6" resizeMode="contain" />
 
-                <View className="px-10">
-                    <Text className="text-2xl font-rubik-bold text-black-300 text-center">
+                    <Text className="text-3xl font-rubik-bold text-center text-violet-700 mb-2">
                         Welcome to CourseSin
                     </Text>
 
-                    <Text className="text-lg font-rubik text-black text-center mt-6">
-                        Sign in to continue
+                    <Text className="text-base text-gray-600 text-center mb-8">
+                        Sign in to continue your learning journey
                     </Text>
 
                     {/* Email Input */}
-                    <Text className="text-base font-rubik mt-8 text-black-500">Email</Text>
+                    <Text className="text-sm text-gray-700 font-medium mb-1">Email</Text>
                     <TextInput
-                        className="border border-gray-300 p-3 rounded-lg mt-2"
+                        className="border border-gray-300 rounded-xl px-4 py-3 mb-5 bg-gray-50"
                         placeholder="Enter your email"
                         value={form.email}
                         onChangeText={(text) => handleChange("email", text)}
                         keyboardType="email-address"
                         autoCapitalize="none"
+                        placeholderTextColor="#9CA3AF"
                     />
 
                     {/* Password Input */}
-                    <Text className="text-base font-rubik mt-4 text-black-500">Password</Text>
+                    <Text className="text-sm text-gray-700 font-medium mb-1">Password</Text>
                     <TextInput
-                        className="border border-gray-300 p-3 rounded-lg mt-2"
+                        className="border border-gray-300 rounded-xl px-4 py-3 mb-6 bg-gray-50"
                         placeholder="Enter your password"
                         value={form.password}
                         onChangeText={(text) => handleChange("password", text)}
                         secureTextEntry
+                        placeholderTextColor="#9CA3AF"
                     />
 
                     {/* Login Button */}
                     <TouchableOpacity
-                        className="bg-blue-600 p-4 mt-6 rounded-lg items-center"
+                        className="bg-violet-600 p-4 rounded-xl items-center shadow-md"
                         onPress={handleSubmit}
                     >
                         {
                             loading ? (
-                                <ActivityIndicator size="large" className="text-white" />
+                                <ActivityIndicator size="small" color="#fff" />
                             ) : (
-                                <Text className="text-white text-lg font-rubik-bold">
+                                <Text className="text-white text-lg font-semibold">
                                     Log In
                                 </Text>
                             )
                         }
-
                     </TouchableOpacity>
 
-                    {/* Forgot Password */}
-                    <TouchableOpacity className="mt-4" onPress={() => router.push('/auth/register')}>
-                        <Text className="text-blue-600 text-center text-sm font-rubik">
-                            Register?
+                    {/* Register link */}
+                    <TouchableOpacity
+                        className="mt-6"
+                        onPress={() => router.push('/auth/register')}
+                    >
+                        <Text className="text-center text-sm text-violet-600">
+                            Don't have an account? <Text className="underline font-medium">Register here</Text>
                         </Text>
                     </TouchableOpacity>
                 </View>

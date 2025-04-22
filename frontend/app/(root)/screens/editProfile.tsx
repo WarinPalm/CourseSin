@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 import useStore from '../store/store';
 import { ProfileResponse } from '../types/responses/user';
-import { editProfile, getProfile } from '../api/user/user';
+import { editProfile, getProfile } from '@/app/(root)/api/user/user';
 
 const EditProfile = () => {
     const router = useRouter();
@@ -93,19 +93,8 @@ const EditProfile = () => {
             await editProfile(token, formData);
             Alert.alert("สำเร็จ", "อัปเดตรายการแล้ว");
             router.back();
-        } catch (err: any) {
-            if (err.response) {
-                console.error("📡 Server Response Error:");
-                console.error("Status:", err.response.status);
-                console.error("Data:", err.response.data);
-                console.error("Headers:", err.response.headers);
-            } else if (err.request) {
-                console.error("📭 No Response from Server. Request was:", err.request);
-            } else {
-                console.error("❌ Error setting up the request:", err.message);
-            }
-        
-            console.error("📃 Full error config:", err.config);
+        } catch (err) {
+            console.error(err);
             Alert.alert("เกิดข้อผิดพลาด", "ไม่สามารถอัปโหลดข้อมูลได้");
         }
         

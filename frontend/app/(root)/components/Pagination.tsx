@@ -12,6 +12,7 @@ type PaginationProps = {
 };
 
 const Pagination: React.FC<PaginationProps> = ({ page, totalPage, setPage, limit, setLimit }) => {
+  
   const handlePrev = () => {
     if (page > 1) setPage(page - 1);
   };

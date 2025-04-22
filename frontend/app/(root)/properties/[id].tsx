@@ -7,7 +7,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import useStore from '../store/store';
 import { CourseResponse } from '../types/responses/course';
-import { getCourseById } from '../api/course/course';
+import { getCourseById } from '@/app/(root)/api/course/course';
 import { Video, ResizeMode } from 'expo-av';
 
 import Constants from "expo-constants";
@@ -23,9 +23,9 @@ const CourseDetails = () => {
   const source = {
     uri: `${API_URL_WITHOUT_API}/uploads/video/${course?.video_file}`,
   };
-  // console.log(source)
-
-
+  
+  console.log(source)
+  
   const player = useVideoPlayer(source, (player) => {
     player.loop = true;
     player.staysActiveInBackground = true;
@@ -105,20 +105,26 @@ const CourseDetails = () => {
           {isActive === 'About' && (
             <View className="px-4">
               <Text className="pt-2 text-xl font-rubik-bold">Description </Text>
-              <Text className="py-4 font-rubik">{course?.description}</Text>
+              <View className='p-2 bg-gray-100 rounded-lg border border-gray-200'>
+
+                <Text className="py-4 font-rubik">{course?.description}</Text>
+              </View>
               <Text className="mt-3 text-xl font-rubik-bold">Create By</Text>
-              <TouchableOpacity className="flex flex-row items-center px-2 py-3" onPress={() => handleClickUser(`${course?.Channel.id}`)}>
-                <Image className="size-16 bg-violet-600 rounded-full border-2 border-white shadow-md" 
-                source={{ uri: `${API_URL_WITHOUT_API}/uploads/profile/${course?.Channel.picture}` }}/>
-                <Text className="text-lg font-rubik-semibold text-gray-800 ms-4">{course?.Channel.f_name} {course?.Channel.l_name}</Text>
-              </TouchableOpacity>
+              <View className=' bg-violet-100 rounded-lg border border-gray-200'>
+
+                <TouchableOpacity className="flex flex-row items-center px-2 py-3" onPress={() => handleClickUser(`${course?.Channel.id}`)}>
+                  <Image className="size-16 bg-violet-600 rounded-full border-2 border-white shadow-md"
+                    source={{ uri: `${API_URL_WITHOUT_API}/uploads/profile/${course?.Channel.picture}` }} />
+                  <Text className="text-lg font-rubik-semibold text-gray-800 ms-4">{course?.Channel.f_name} {course?.Channel.l_name}</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           )}
 
           {isActive === 'Video' && (
             <View>
               <Text className="px-4 py-4 text-2xl font-bold">Video</Text>
-              <View className="bg-purple-700 p-3 rounded-3xl shadow-2xl mb-3 mx-2">
+              <View className="bg-violet-700 p-3 rounded-3xl shadow-2xl mb-3 mx-2">
                 <VideoView
                   player={player}
                   style={{
@@ -138,7 +144,10 @@ const CourseDetails = () => {
           {isActive === 'Benefit' && (
             <View className='px-4'>
               <Text className="pt-2 text-xl font-rubik-bold">Benefit Content </Text>
-              <Text className="py-4 font-rubik">{course?.benefit}</Text>
+              <View className='p-2 bg-gray-100 rounded-lg border border-gray-200'>
+
+                <Text className="py-4 font-rubik">✅  {course?.benefit}</Text>
+              </View>
 
             </View>
           )}

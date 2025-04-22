@@ -8,10 +8,10 @@ import NoResults from '../components/NoResults';
 import Pagination from '../components/Pagination';
 import useStore from '../store/store';
 import { ViewCourseResponse } from '../types/responses/course';
-import { viewMyCourse } from '../api/user/user';
+import { viewMyCourse } from '@/app/(root)/api/user/user';
 import { CategoryResponse } from '../types/responses/category';
-import { getAllCategory } from '../api/category/category';
-import { deleteCourse, editCourse } from '../api/course/course';
+import { getAllCategory } from '@/app/(root)/api/category/category';
+import { deleteCourse, editCourse } from '@/app/(root)/api/course/course';
 
 const MyVideo = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -140,25 +140,28 @@ const MyVideo = () => {
                     keyExtractor={(course) => course.id}
                     renderItem={({ item }) => (
                         <View className='w-100 p-2'>
-                            <CourseCard
-                                thumbnail={item.thumbnail}
-                                title={item.title}
-                                f_name={user?.f_name}
-                                l_name={user?.l_name}
-                                category_name={item.Category.name}
-                                like={item._count?.like}
-                                onPress={() => handleCardClick(item.id)}
-                            />
-                            <View className='flex flex-row justify-end'>
+                            <View className='p-2 bg-violet-200 rounded-xl border border-gray-200'>
 
-                                <TouchableOpacity className='p-2 mt-2 mx-1 rounded-lg bg-blue-500'
-                                    onPress={() => handleEdit(item)}>
-                                    <Text className='font-bold text-white text-center'>Edit</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity className='p-2 mt-2 mx-1 rounded-lg bg-red-500'
-                                    onPress={() => handleDelete(item.id)}>
-                                    <Text className='font-bold text-white text-center'>Delete</Text>
-                                </TouchableOpacity>
+                                <CourseCard
+                                    thumbnail={item.thumbnail}
+                                    title={item.title}
+                                    f_name={user?.f_name}
+                                    l_name={user?.l_name}
+                                    category_name={item.Category.name}
+                                    like={item._count?.like}
+                                    onPress={() => handleCardClick(item.id)}
+                                />
+                                <View className='flex flex-row justify-end'>
+
+                                    <TouchableOpacity className='p-2 mt-2 mx-1 rounded-lg bg-blue-500'
+                                        onPress={() => handleEdit(item)}>
+                                        <Text className='font-bold text-white text-center'>Edit</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity className='p-2 mt-2 mx-1 rounded-lg bg-red-500'
+                                        onPress={() => handleDelete(item.id)}>
+                                        <Text className='font-bold text-white text-center'>Delete</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
                         </View>
                     )}
@@ -170,7 +173,7 @@ const MyVideo = () => {
                         ) : <NoResults />
                     }
                     ListFooterComponent={
-                        (totalPage > 1 || (courses && courses.length <= limit)) ? (
+                        (totalPage > 1 || (courses && courses.length > 0 && courses.length <= limit)) ? (
                             <Pagination page={page} totalPage={totalPage || page + 1} setPage={setPage} limit={limit} setLimit={setLimit} />
                         ) : null
                     }
@@ -225,7 +228,7 @@ const MyVideo = () => {
                                 onPress={handleUpdate}>
                                 <Text className='text-white font-bold'>Update</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity className='p-2 bg-red-500 rounded-lg'
+                            <TouchableOpacity className='p-2 bg-gray-500 rounded-lg'
                                 onPress={closeModal}>
                                 <Text className='text-white font-bold'>Cancel</Text>
                             </TouchableOpacity>

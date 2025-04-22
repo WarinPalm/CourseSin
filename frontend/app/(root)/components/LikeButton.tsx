@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import * as Icon from 'react-native-feather';
-import { likeCourse, listFavorite, unlikeCourse } from '../api/favorite/favorite';
+import { likeCourse, listFavorite, unlikeCourse } from '@/app/(root)/api/favorite/favorite';
 
 interface LikeButtonProps {
     courseId: string;

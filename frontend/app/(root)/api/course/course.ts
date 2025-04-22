@@ -1,7 +1,7 @@
 import axios from "axios";
 import Constants from "expo-constants";
 const API_URL = Constants.expoConfig?.extra?.API_URL;
-import { CourseForm, PayLoadEditCourse } from "../../types/requests/course";
+import { CourseForm, PayLoadEditCourse } from "@/app/(root)/types/requests/course";
 
 export const getAllCourse = async (token: string) => {
     return await axios.get(`${API_URL}/courses`, {

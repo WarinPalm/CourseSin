@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { getAllCategory } from '../api/category/category';
+import { getAllCategory } from '@/app/(root)/api/category/category';
 import { CategoryResponse } from '../types/responses/category';
 
 const imageMap: Record<string, any> = {

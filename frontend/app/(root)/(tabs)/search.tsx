@@ -8,9 +8,10 @@ import Category from '../components/category';
 import CourseCard from '../components/courseCard';
 import SearchBar from '../components/searchBar';
 import NoResults from '../components/NoResults';
-import { getAllCourse, getCourseByCategory } from '../api/course/course';
+import { getAllCourse, getCourseByCategory } from '@/app/(root)/api/course/course';
 import { CourseResponse } from '../types/responses/course';
 import useStore from '../store/store';
+
 const Search = () => {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);

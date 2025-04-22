@@ -8,7 +8,7 @@ import { useLocalSearchParams } from 'expo-router';
 import Pagination from '../components/Pagination';
 import useStore from '../store/store';
 import { CourseResponse } from '../types/responses/course';
-import { getAllCoursePagination, getCatCoursePagination, getCourseByCategory } from '../api/course/course';
+import { getAllCoursePagination, getCatCoursePagination, getCourseByCategory } from '@/app/(root)/api/course/course';
 
 const ViewAll = () => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -92,7 +92,7 @@ const ViewAll = () => {
                         ) : <NoResults />
                     }
                     ListFooterComponent={
-                        (totalPage > 1 || (courses && courses.length <= limit)) ? (
+                        (totalPage > 1 || (courses && courses.length > 0 && courses.length <= limit)) ? (
                             <Pagination page={page} totalPage={totalPage || page + 1} setPage={setPage} limit={limit} setLimit={setLimit} />
                         ) : null
                     }

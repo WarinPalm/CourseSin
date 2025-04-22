@@ -8,7 +8,7 @@ import { useLocalSearchParams } from 'expo-router';
 import Pagination from '../components/Pagination';
 import useStore from '../store/store';
 import { ViewCourseResponse } from '../types/responses/course';
-import { watchChannelCourse } from '../api/user/user';
+import { watchChannelCourse } from '@/app/(root)/api/user/user';
 
 
 const WatchVideo = () => {
@@ -86,7 +86,7 @@ const WatchVideo = () => {
                         ) : <NoResults />
                     }
                     ListFooterComponent={
-                        (totalPage > 1 || (courses && courses.length <= limit)) ? (
+                        (totalPage > 1 || (courses && courses.length > 0 && courses.length <= limit)) ? (
                             <Pagination page={page} totalPage={totalPage || page + 1} setPage={setPage} limit={limit} setLimit={setLimit} />
                         ) : null
                     }

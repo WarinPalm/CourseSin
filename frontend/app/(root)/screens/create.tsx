@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import icons from '@/constants/icons';
 import { useRouter } from 'expo-router';
 import { CategoryResponse } from '../types/responses/category';
-import { getAllCategory } from '../api/category/category';
+import { getAllCategory } from '@/app/(root)/api/category/category';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
-import { addCourse } from '../api/course/course';
+import { addCourse } from '@/app/(root)/api/course/course';
 import useStore from '../store/store';
 
 const Create = () => {

@@ -4,9 +4,11 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import icons from "@/constants/icons"
 import useStore from '../store/store';
-import { getProfile } from '../api/user/user';
+import { getProfile } from '@/app/(root)/api/user/user';
 import { ProfileResponse } from '../types/responses/user';
 import Constants from "expo-constants";
+import images from '@/constants/images';
+
 const API_URL_WITHOUT_API = Constants.expoConfig?.extra?.API_URL_WITHOUT_API;
 
 
@@ -50,7 +52,7 @@ const Profile = () => {
             }
         }
         fetchProfile();
-    }, [])
+    }, [profile])
     return (
         <SafeAreaView className='h-full bg-white'>
             <ScrollView showsVerticalScrollIndicator={false}
@@ -65,10 +67,14 @@ const Profile = () => {
                 <View className='flex flex-row justify-center mt-5'>
                     <View className='flex flex-col items-center relative mt-5'>
                         <View className='relative'>
-
+                 
                             <Image
                                 className='bg-violet-500 size-44 rounded-full'
-                                source={{ uri: `${API_URL_WITHOUT_API}/uploads/profile/${profile?.picture}` }}
+                                source={{
+                                    uri: profile?.picture
+                                        ? `${API_URL_WITHOUT_API}/uploads/profile/${profile.picture}`
+                                        : Image.resolveAssetSource(images.user).uri,
+                                }}
                             />
                             <TouchableOpacity
                                 className='absolute bottom-1 right-2'
