@@ -86,7 +86,7 @@ const Home = () => {
             {/* category */}
             <View className="flex-row items-center ms-3 my-4">
               <Icon.Book height={20} width={20} stroke="black" />
-              <Text className="ms-2 font-bold text-xl">หมวดหมู่</Text>
+              <Text className="ms-2 font-kanit-bold text-xl">หมวดหมู่</Text>
             </View>
             <Category
               selectedCategory={selectedCategory}
@@ -99,11 +99,11 @@ const Home = () => {
             <View className="mt-3">
               <View className="flex-row items-center justify-between px-4">
                 <View>
-                  <Text className="font-rubik-bold text-lg">คอร์สแนะนำ</Text>
-                  <Text className="font-rubik text-black text-xs">ยอดนิยม</Text>
+                  <Text className="font-kanit-bold text-lg">คอร์สแนะนำ</Text>
+                  <Text className="font-kanit text-black text-xs">ยอดนิยม</Text>
                 </View>
                 <TouchableOpacity onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}&name=${encodeURIComponent(categoryName)}`)}>
-                  <Text className="font-rubik-semibold text-black">ดูทั้งหมด</Text>
+                  <Text className="font-kanit-semibold text-black">ดูทั้งหมด</Text>
                 </TouchableOpacity>
               </View>
 
@@ -145,11 +145,11 @@ const Home = () => {
             <View className="mt-2 mb-2">
               <View className="flex-row items-center justify-between px-4">
                 <View>
-                  <Text className="font-rubik-bold text-lg">คอร์สเรียน</Text>
-                  <Text className="font-rubik text-black text-xs">คอร์สเรียนทั้งหมด</Text>
+                  <Text className="font-kanit-bold text-lg">คอร์สเรียน</Text>
+                  <Text className="font-kanit text-black text-xs">คอร์สเรียนทั้งหมด</Text>
                 </View>
                 <TouchableOpacity onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}&name=${encodeURIComponent(categoryName)}`)}>
-                  <Text className="font-rubik-semibold text-black">ดูทั้งหมด</Text>
+                  <Text className="font-kanit-semibold text-black">ดูทั้งหมด</Text>
                 </TouchableOpacity>
               </View>
             </View>

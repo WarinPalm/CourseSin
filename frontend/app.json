@@ -42,7 +42,13 @@
             "./assets/fonts/Rubik-Medium.ttf",
             "./assets/fonts/Rubik-Light.ttf",
             "./assets/fonts/Rubik-Regular.ttf",
-            "./assets/fonts/Rubik-SemiBold.ttf"
+            "./assets/fonts/Rubik-SemiBold.ttf",
+            "./assets/fonts/Kanit-Bold.ttf",
+            "./assets/fonts/Kanit-ExtraBold.ttf",
+            "./assets/fonts/Kanit-Medium.ttf",
+            "./assets/fonts/Kanit-Light.ttf",
+            "./assets/fonts/Kanit-Regular.ttf",
+            "./assets/fonts/Kanit-SemiBold.ttf"
           ]
         }
       ],
@@ -64,8 +70,8 @@
       "typedRoutes": true
     },
     "extra": {
-      "API_URL": "https://hip-doors-watch.loca.lt/api",
-      "API_URL_WITHOUT_API":"https://hip-doors-watch.loca.lt"
+      "API_URL": "https://sad-windows-tease.loca.lt/api",
+      "API_URL_WITHOUT_API":"https://sad-windows-tease.loca.lt"
     }
   }
 }

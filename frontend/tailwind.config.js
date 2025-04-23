@@ -12,6 +12,13 @@ module.exports = {
         "rubik-medium": ["Rubik-Medium", "sans-serif"],
         "rubik-semibold": ["Rubik-SemiBold", "sans-serif"],
         "rubik-light": ["Rubik-Light", "sans-serif"],
+        "kanit-bold": ["Kanit-Bold", "sans-serif"],
+        
+        kanit:["Kanit-Regular", "sans-serif"],
+        "kanit-extrabold": ["Kanit-ExtraBold", "sans-serif"],
+        "kanit-medium": ["Kanit-Medium", "sans-serif"],
+        "kanit-semibold": ["Kanit-SemiBold", "sans-serif"],
+        "kanit-light": ["Kanit-Light", "sans-serif"],
       }
     },
     // colors: {

@@ -19,7 +19,7 @@ const SuggestionCard: React.FC<CourseCardProps> = ({ thumbnail, title, f_name, l
 
                 <View className="px-3 pb-4 space-y-2">
                     <View className='flex-row items-center space-x-1 pt-2'>
-                        <Image className='w-3 h-3 bg-yellow-500' />
+                        <Image className='w-3 h-3 bg-violet-700 rounded-full' />
                         <Text className='font-rubik text-sm ms-2 mt-1 text-gray-500'>{f_name} {l_name}</Text>
                     </View>
                     <Text className='text-lg font-rubik-bold mt-1'>{title}</Text>

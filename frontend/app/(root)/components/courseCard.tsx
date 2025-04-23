@@ -22,7 +22,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ thumbnail, title, f_name, l_nam
             <View className='w-2/3 px-4 pb-4 space-y-2'>
                 <Text className='text-lg font-rubik-bold pt-3'>{title}</Text>
                 <View className='flex-row items-center space-x-1'>
-                    <Image className='w-4 h-4 bg-yellow-500' />
+                    <Image className='w-4 h-4 bg-violet-700 rounded-full' />
                     <Text className='font-rubik text-sm ms-2 mt-1 text-gray-500'>{f_name} {l_name}</Text>
                 </View>
                 <View className='flex-row items-center space-x-1 pt-1'>

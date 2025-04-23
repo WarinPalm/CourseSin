@@ -20,7 +20,7 @@ const SettingsItem = ({ icon, title, onPress, showArrow = true }: SettingsItemPr
         <TouchableOpacity onPress={onPress} className='flex flex-row items-center justify-between py-3'>
             <View className='flex flex-row items-center gap-3'>
                 <Image source={icon} className='size-6' />
-                <Text className='text-lg font-rubik-medium text-black-300'>{title}</Text>
+                <Text className='text-lg font-kanit-medium text-black-300'>{title}</Text>
             </View>
             {showArrow && <Image source={icons.rightArrow} className='size-5' />}
         </TouchableOpacity>

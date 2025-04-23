@@ -51,15 +51,15 @@ const SignIn = () => {
                         Welcome to CourseSin
                     </Text>
 
-                    <Text className="text-base text-gray-600 text-center mb-8">
-                        Sign in to continue your learning journey
+                    <Text className="font-kanit text-gray-600 text-center mb-8">
+                        เข้าสู่ระบบเพื่อเริ่มต้นการเรียนรู้
                     </Text>
 
                     {/* Email Input */}
                     <Text className="text-sm text-gray-700 font-medium mb-1">Email</Text>
                     <TextInput
                         className="border border-gray-300 rounded-xl px-4 py-3 mb-5 bg-gray-50"
-                        placeholder="Enter your email"
+                        placeholder="your@gmail.com"
                         value={form.email}
                         onChangeText={(text) => handleChange("email", text)}
                         keyboardType="email-address"
@@ -71,7 +71,7 @@ const SignIn = () => {
                     <Text className="text-sm text-gray-700 font-medium mb-1">Password</Text>
                     <TextInput
                         className="border border-gray-300 rounded-xl px-4 py-3 mb-6 bg-gray-50"
-                        placeholder="Enter your password"
+                        placeholder="รหัสผ่าน"
                         value={form.password}
                         onChangeText={(text) => handleChange("password", text)}
                         secureTextEntry
@@ -99,8 +99,8 @@ const SignIn = () => {
                         className="mt-6"
                         onPress={() => router.push('/auth/register')}
                     >
-                        <Text className="text-center text-sm text-violet-600">
-                            Don't have an account? <Text className="underline font-medium">Register here</Text>
+                        <Text className="text-center font-kanit text-violet-600">
+                            มีบัญชีแล้วหรือยัง? <Text className="underline font-kanit-bold">ลงทะเบียนที่นี่</Text>
                         </Text>
                     </TouchableOpacity>
                 </View>

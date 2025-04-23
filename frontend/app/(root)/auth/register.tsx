@@ -46,7 +46,7 @@ const Register = () => {
      
         <View className="px-8 pt-6">
           <Text className="text-3xl font-rubik-bold text-violet-700 text-center mb-2">Create Account</Text>
-          <Text className="text-base text-gray-500 text-center mb-8">สมัครสมาชิกเพื่อเริ่มต้นการเรียนรู้</Text>
+          <Text className="font-kanit text-gray-500 text-center mb-8">สมัครสมาชิกเพื่อเริ่มต้นการเรียนรู้</Text>
 
           <Text className="text-sm font-rubik-medium text-gray-700 mb-1">Email</Text>
           <TextInput
@@ -101,8 +101,8 @@ const Register = () => {
           </TouchableOpacity>
 
           <TouchableOpacity className="mt-6" onPress={() => router.push('/sign-in')}>
-            <Text className="text-center text-sm text-violet-600">
-              มีบัญชีแล้วใช่ไหม? <Text className="underline font-medium">เข้าสู่ระบบ</Text>
+            <Text className="text-center font-kanit text-violet-600">
+              มีบัญชีแล้วใช่ไหม? <Text className="underline font-kanit-bold">เข้าสู่ระบบ</Text>
             </Text>
           </TouchableOpacity>
         </View>

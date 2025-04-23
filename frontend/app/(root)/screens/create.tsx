@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import icons from '@/constants/icons';
 import { useRouter } from 'expo-router';
@@ -27,7 +27,7 @@ const Create = () => {
         setFormCourse({ ...formCourse, [key]: value });
     };
 
-    
+
     useEffect(() => {
         const fetchCategories = async () => {
             try {
@@ -78,13 +78,14 @@ const Create = () => {
 
     const handleCreateVideo = async () => {
         try {
+            setLoading(true);
             const { title, description, benefit, thumbnail, video, category_id } = formCourse;
 
             if (!title || !description || !benefit || !category_id || !thumbnail || !video) {
                 alert('กรุณากรอกข้อมูลให้ครบถ้วน');
                 return;
             }
-            if(!token) throw new Error('token is required')
+            if (!token) throw new Error('token is required')
             const formData = new FormData();
 
             formData.append('title', title);
@@ -129,6 +130,8 @@ const Create = () => {
         } catch (err: any) {
             console.error(err);
             Alert.alert('เกิดข้อผิดพลาด', 'ไม่สามารถสร้างคอร์สได้');
+        }finally {
+            setLoading(false);
         }
     };
 
@@ -148,6 +151,7 @@ const Create = () => {
                 {/* Title */}
                 <Text className="text-md font-bold text-gray-800 mb-3">ชื่อวีดีโอ</Text>
                 <TextInput
+                    keyboardType="default" 
                     className="mb-3 p-3 border border-gray-300 rounded-lg text-black"
                     placeholder="ชื่อวีดีโอ"
                     value={formCourse.title}
@@ -222,7 +226,14 @@ const Create = () => {
                     onPress={handleCreateVideo}
                     className="bg-violet-600 p-4 rounded-lg items-center"
                 >
-                    <Text className="text-white font-semibold">สร้างวีดีโอ</Text>
+                    {
+                        loading ? (
+                            <ActivityIndicator size="small" color="#fff" />
+                        ) : (
+                            <Text className="text-white font-semibold">สร้างวีดีโอ</Text>
+                        )
+                    }
+                   
                 </TouchableOpacity>
             </View>
         </ScrollView>

@@ -107,7 +107,7 @@ const CourseDetails = () => {
               <Text className="pt-2 text-xl font-rubik-bold">Description </Text>
               <View className='p-2 bg-gray-100 rounded-lg border border-gray-200'>
 
-                <Text className="py-4 font-rubik">{course?.description}</Text>
+                <Text className="py-4 font-kanit">{course?.description}</Text>
               </View>
               <Text className="mt-3 text-xl font-rubik-bold">Create By</Text>
               <View className=' bg-violet-100 rounded-lg border border-gray-200'>
@@ -146,7 +146,7 @@ const CourseDetails = () => {
               <Text className="pt-2 text-xl font-rubik-bold">Benefit Content </Text>
               <View className='p-2 bg-gray-100 rounded-lg border border-gray-200'>
 
-                <Text className="py-4 font-rubik">✅  {course?.benefit}</Text>
+                <Text className="py-4 font-kanit">✅  {course?.benefit}</Text>
               </View>
 
             </View>

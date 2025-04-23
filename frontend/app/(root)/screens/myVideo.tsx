@@ -111,15 +111,21 @@ const MyVideo = () => {
     const handleDelete = async (id: string) => {
         try {
             if (!token) throw new Error("token is require");
-            await deleteCourse(token, id)
+    
+            const courseToDelete = courses?.find((c) => c.id === id);
+            const courseName = courseToDelete?.title || "";
+    
+            await deleteCourse(token, id);
             fetchCourses();
-            Alert.alert("success", "ลบคอร์สสำเร็จ");
-
+    
+            Alert.alert("สำเร็จ", `ลบคอร์ส "${courseName}" สำเร็จแล้ว`);
+    
         } catch (err) {
             console.error(err);
-            Alert.alert("error", "ลบคอร์สไม่สำเร็จ");
+            Alert.alert("เกิดข้อผิดพลาด", "ลบคอร์สไม่สำเร็จ");
         }
     };
+    
 
 
     const handleCardClick = (id: string) => {

@@ -99,14 +99,14 @@ const Search = () => {
                 onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}&name=${encodeURIComponent(categoryName)}`)}>
                 <View className="flex-row items-center justify-center">
                   <Icon.Folder height={20} width={20} stroke="white" />
-                  <Text className="font-rubik text-white ms-3">คอร์สเรียนทั้งหมด</Text>
+                  <Text className="font-kanit text-white ms-3">คอร์สเรียนทั้งหมด</Text>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity className="flex-1 p-4 bg-blue-600 rounded-md ml-2"
               onPress={()=> router.push(`/screens/popularCourse`)}>
                 <View className="flex-row items-center justify-center">
                   <Icon.Menu height={20} width={20} stroke="white" />
-                  <Text className="font-rubik text-white ms-3">ช่องที่แนะนำ</Text>
+                  <Text className="font-kanit text-white ms-3">ช่องที่แนะนำ</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -115,7 +115,7 @@ const Search = () => {
             <View className="my-4">
               <View className="flex-row items-center ms-3 my-2">
                 <Icon.Book height={20} width={20} stroke="black" />
-                <Text className="ms-2 font-rubik-bold text-xl">หมวดหมู่</Text>
+                <Text className="ms-2 font-kanit-bold text-xl">หมวดหมู่</Text>
               </View>
               <Category
                 selectedCategory={selectedCategory}
@@ -129,11 +129,11 @@ const Search = () => {
             <View className="mt-2 mb-2">
               <View className="flex-row items-center justify-between px-4">
                 <View>
-                  <Text className="font-rubik-bold text-lg">คอร์สเรียน</Text>
-                  <Text className="font-rubik text-black text-xs">คอร์สเรียนทั้งหมด</Text>
+                  <Text className="font-kanit-bold text-lg">คอร์สเรียน</Text>
+                  <Text className="font-kanit text-black text-xs">คอร์สเรียนทั้งหมด</Text>
                 </View>
                 <TouchableOpacity onPress={() => router.push(`/screens/viewAll?category=${selectedCategory}&name=${encodeURIComponent(categoryName)}`)}>
-                  <Text className="font-rubik-semibold text-black">ดูทั้งหมด</Text>
+                  <Text className="font-kanit-semibold text-black">ดูทั้งหมด</Text>
                 </TouchableOpacity>
               </View>
             </View>

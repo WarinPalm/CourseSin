@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert,ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import icons from '@/constants/icons';
 import { useRouter } from 'expo-router';
@@ -11,6 +11,7 @@ import { editProfile, getProfile } from '@/app/(root)/api/user/user';
 const EditProfile = () => {
     const router = useRouter();
     const token = useStore((state) => state.token);
+    const [loading, setLoading] = useState(false);
 
     const [profile, setProfile] = useState<ProfileResponse>();
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -54,10 +55,10 @@ const EditProfile = () => {
             const filename = localUri.split('/').pop() || 'profile.jpg';
             const ext = filename.split('.').pop()?.toLowerCase();
             const mimeType = ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' :
-                             ext === 'png' ? 'image/png' : 'image';
+                ext === 'png' ? 'image/png' : 'image';
 
-            setFormProfile({ 
-                ...formProfile, 
+            setFormProfile({
+                ...formProfile,
                 profile: { uri: localUri, name: filename, type: mimeType }
             });
         }
@@ -65,6 +66,7 @@ const EditProfile = () => {
 
     const handleEditProfile = async () => {
         try {
+            setLoading(true);
             if (!token) throw new Error('Token is required');
 
             // ตรวจสอบรหัสผ่านทั้งสองช่อง
@@ -91,13 +93,15 @@ const EditProfile = () => {
             }
 
             await editProfile(token, formData);
-            Alert.alert("สำเร็จ", "อัปเดตรายการแล้ว");
+            Alert.alert("สำเร็จ", "อัปเดตโปรไฟล์เรียบร้อยแล้ว");
             router.back();
         } catch (err) {
             console.error(err);
             Alert.alert("เกิดข้อผิดพลาด", "ไม่สามารถอัปโหลดข้อมูลได้");
+        }finally {
+            setLoading(false);
         }
-        
+
     };
 
     return (
@@ -117,6 +121,7 @@ const EditProfile = () => {
                 <View>
                     <Text className="text-sm font-semibold text-gray-700 mb-3">ชื่อ</Text>
                     <TextInput
+                    
                         className="mt-2 p-3 border border-gray-300 rounded-lg text-black"
                         placeholder={profile?.f_name}
                         value={formProfile.f_name}
@@ -177,7 +182,14 @@ const EditProfile = () => {
                     onPress={handleEditProfile}
                     className="mt-6 bg-violet-600 p-4 rounded-lg items-center"
                 >
-                    <Text className="text-white font-semibold">ยืนยันการแก้ไข</Text>
+                    {
+                        loading ? (
+                            <ActivityIndicator size="small" color="#fff" />
+                        ) : (
+                            <Text className="text-white font-semibold">ยืนยันการแก้ไข</Text>
+                        )
+                    }
+ 
                 </TouchableOpacity>
 
             </View>
