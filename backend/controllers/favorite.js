@@ -49,14 +49,6 @@ exports.listFavaorite = async (req , res) => {
                         thumbnail : true,
                         _count : { select : { like : true } },
                         Category : { select : { id : true , name : true } },
-                        // Channel : {
-                        //     select : {
-                        //         id : true,
-                        //         f_name : true,
-                        //         l_name : true,
-                        //         picture : true
-                        //     }
-                        // },
                         created_at : true,
                     }
                 }

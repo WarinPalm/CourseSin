@@ -39,10 +39,6 @@ exports.uploadProfile = (req , res , next) => {
     })
 }
 
-// const folders = ['./uploads/video', './uploads/video/thumbnail'];
-// folders.forEach(dir => {
-//   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-// });
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -89,28 +85,6 @@ exports.uploadCourseFiles = (req, res, next) => {
     });
   };
 
-// exports.uploadVideo = (req , res , next) => {
-//     uploadVideo.single('video') (req , res , (err) => {
-//         if(err){
-//             return res.status(500).json({ message : 'Error uploading file' , error : err });
-//         }
-//         if(!req.file){
-//             return res.status(400).json({ message : 'No file uploaded' });
-//         }
-//         next();
-//     })
-// }
 
-// exports.uploadThumbnail = (req , res , next) => {
-//     uploadThumbnail.single('thumbnail') (req , res , (err) => {
-//         if(err){
-//             return res.status(500).json({ message : 'Error uploading file' , error : err });
-//         }
-//         if(!req.file){
-//             return res.status(400).json({ message : 'No file uploaded' });
-//         }
-//         next();
-//     })
-// }
 
 
