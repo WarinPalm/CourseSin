@@ -65,7 +65,7 @@ exports.login = async (req , res) => {
             if(err){
                 return res.status(500).json({msg : 'Server Error'});
             }
-            res.json({payload , token});
+            res.status(200).json({payload , token});
         })
     }catch (err){
         console.log(err);
@@ -82,7 +82,7 @@ exports.currentUser = async (req , res) => {
                 email: true,
             }
         });
-        res.json(user);
+        res.status(200).json(user);
     }catch (err){
         console.log(err);
         res.status(500).json({msg : 'Internal Server Error'});

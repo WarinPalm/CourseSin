@@ -36,10 +36,10 @@ model Categories {
 model Courses {
   id          String      @id @default(uuid())
   title       String
-  description String?     @db.Text
-  benefit     String?
+  description String      @db.Text
+  benefit     String
   video_file  String
-  thumbnail   String?
+  thumbnail   String
   status      Boolean     @default(true)
   Category    Categories  @relation(fields: [category], references: [id])
   category    String

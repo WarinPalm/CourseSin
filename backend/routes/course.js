@@ -6,7 +6,6 @@ const {
     getCourse ,
     editCourse , 
     removeCourse , 
-    viewCourse , 
     createCategory , 
     listAllCategory 
 } = require('../controllers/course');
